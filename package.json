@@ -1,0 +1,20 @@
+{
+  "name": "upload-service",
+  "version": "0.0.0",
+  "description": "A service responsible for handling upload requests",
+  "main": "lib/index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PermanentOrg/upload-service.git"
+  },
+  "author": "Permanent.org",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/PermanentOrg/upload-service/issues"
+  },
+  "homepage": "https://permanent.org",
+  "engines": {
+    "node": ">=12.0"
+  }
+}
