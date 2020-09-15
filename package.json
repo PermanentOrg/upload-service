@@ -6,7 +6,8 @@
   "scripts": {
     "build": "babel src -d lib",
     "lint": "eslint 'src/**/*.js'",
-    "start": "babel-node src/index.js"
+    "start": "babel-node src/index.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
     "@babel/preset-env": "^7.11.5",
     "eslint": "^7.9.0",
     "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-import": "^2.22.0"
+    "eslint-plugin-import": "^2.22.0",
+    "jest": "^26.4.2"
   }
 }
