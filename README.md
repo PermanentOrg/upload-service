@@ -18,6 +18,12 @@ This service does not process files, but provides the information necessary to t
 npm install
 ```
 
+2. Start the project.
+
+```
+npm start
+```
+
 ## Contributing
 
 Contributors to this repository agree to adhere to the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md). To report violations, get in touch with engineers@permanent.org.
