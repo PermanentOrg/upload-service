@@ -25,8 +25,10 @@
     "node": ">=12.0"
   },
   "dependencies": {
+    "aws-sdk": "^2.763.0",
     "body-parser": "^1.19.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "uuid": "^8.3.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.11.6",
@@ -37,6 +39,7 @@
     "@tsconfig/node12": "^1.0.7",
     "@types/express": "^4.17.8",
     "@types/jest": "^26.0.13",
+    "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.1.1",
     "@typescript-eslint/parser": "^4.1.1",
     "eslint": "^7.9.0",
