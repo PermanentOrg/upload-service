@@ -7,7 +7,11 @@ This service does not process files, but provides the information necessary to t
 ## Structure
 
 ```
-- src // The code
+- docs         // API documentation
+- src
+|- controllers // maps between routes to services
+|- routes      // endpoint definitions
+|- services    // business logic
 ```
 
 ## Usage
@@ -18,7 +22,29 @@ This service does not process files, but provides the information necessary to t
 npm install
 ```
 
-2. Start the project.
+2. [Configure AWS credentials.](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html)
+
+These credentials should be associated with an account that has `s3:PutObject` access to the bucket objects you would like API clients to be able to write to.
+
+An example custom policy:
+
+```
+{
+    "Statement": [
+        {
+            "Action": [
+                "s3:PutObject"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:s3:::MyBucketNameGoesHere/*"
+            ]
+        }
+    ]
+}
+```
+
+3. Start the project.
 
 ```
 npm start
