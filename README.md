@@ -50,6 +50,49 @@ An example custom policy:
 npm start
 ```
 
+4. Check health.
+
+```
+curl localhost:3000/api/health
+```
+
+Should output:
+
+```
+{"status":"available","message":"OK"}
+```
+
+## Endpoints
+
+### GET /api/health
+#### Input
+No inputs.
+
+#### Output
+Returns a health check.
+
+- `status`: either `available` or `unavailable`.
+- `message`: a more detailed explanation about the health status.
+
+### POST /api/fileDestinationUrl
+#### Input
+##### Required
+
+- `bucket`: the AWS S3 bucket the file will be passed to (e.g. `permanent-local`).
+- `fileType`: the mime type of the file being uploaded (e.g. `image/png`),
+- `maxSize`: the maximum file size that the destination should accept,
+
+##### Optional
+
+- `fileName`: the destination file name within the bucket.
+- `path`: the destination path within the bucket.
+
+#### Output
+- `destinationUrl`: the URL that will ultimately hold the file once it has been uploaded.
+- `presignedPost`: an AWS S3 presigned post which will accept the file.  This post will contain:
+  - `url`: the URL that the file should be POSTed to.
+  - `fields`: an array of fields which must be submitted as part of the POST body. These fields must appear before the file content itself.
+
 ## Contributing
 
 Contributors to this repository agree to adhere to the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md). To report violations, get in touch with engineers@permanent.org.
