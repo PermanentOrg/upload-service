@@ -1,6 +1,3 @@
-import express from 'express';
-import { apiRoutes } from './routes';
+import { app } from './app';
 
-const app = express();
-app.use('/api', apiRoutes);
 app.listen(process.env.PORT ?? 3000);
