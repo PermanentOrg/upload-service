@@ -8,7 +8,7 @@
     "check-types": "tsc",
     "eslint": "eslint ./src --ext .ts,.tsx",
     "lint": "npm run eslint && npm run check-types",
-    "start": "babel-node --extensions '.ts,.tsx' src/index.ts",
+    "start": "babel-node --extensions \".ts,.tsx\" src/index.ts",
     "test": "jest"
   },
   "repository": {
