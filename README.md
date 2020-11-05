@@ -1,8 +1,8 @@
 # Permanent.org Upload Service
 
-This repository contains a service responsible for handling upload requests.
+The upload service is responsible for handling upload requests.
 
-This service does not process files, but provides the information necessary to the client in order to upload to S3 directly.
+It does not process files, but it does provides the client with the needed information to upload to S3 directly.
 
 ## Structure
 
