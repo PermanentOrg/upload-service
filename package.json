@@ -16,7 +16,7 @@
     "url": "git+https://github.com/PermanentOrg/upload-service.git"
   },
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com"
+    "registry":"https://npm.pkg.github.com/PermanentOrg"
   },
   "author": "Permanent.org",
   "license": "AGPL-3.0",
