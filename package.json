@@ -1,5 +1,5 @@
 {
-  "name": "upload-service",
+  "name": "@PermanentOrg/upload-service",
   "version": "0.0.0",
   "description": "A service responsible for handling upload requests",
   "main": "lib/index.js",
