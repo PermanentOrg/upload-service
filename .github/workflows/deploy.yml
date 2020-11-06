@@ -10,8 +10,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
-              with:
-                  path: "upload-service"
             - uses: actions/setup-node@v1
               with:
                 node-version: '10.x'
@@ -19,8 +17,8 @@ jobs:
             - run: npm install
             - name: Create a tar archive
               run: |
-                cd $GITHUB_WORKSPACE
-                tar --exclude=.git* -czvf uploade-service.tar.gz upload-service
+                cd ..
+                tar --exclude=.git* -czvf upload-service.tar.gz upload-service
             - name: Configure AWS Credentials
               uses: aws-actions/configure-aws-credentials@v1
               with:
