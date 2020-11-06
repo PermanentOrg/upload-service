@@ -1,4 +1,4 @@
-![Tests](https://github.com/PermanentOrg/upload-service/workflows/Run%20unit%20tests/badge.svg)
+![unit tests](https://github.com/PermanentOrg/upload-service/workflows/unit%20tests/badge.svg)
 # Permanent.org Upload Service
 
 The upload service is responsible for handling upload requests.
