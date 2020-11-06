@@ -14,7 +14,7 @@ jobs:
               with:
                 node-version: '10.x'
                 registry-url: 'https://npm.pkg.github.com'
-            - run: npm install
+            - run: npm install --production
             - name: Create a tar archive
               run: |
                 cd ..
