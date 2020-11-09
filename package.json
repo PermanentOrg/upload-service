@@ -25,6 +25,7 @@
     "node": ">=12.0"
   },
   "dependencies": {
+    "@sentry/node": "^5.27.3",
     "aws-sdk": "^2.763.0",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
