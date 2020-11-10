@@ -4,7 +4,7 @@
   "description": "A service responsible for handling upload requests",
   "main": "lib/index.js",
   "scripts": {
-    "build": "babel src -d lib",
+    "build": "babel --extensions '.ts,.tsx' src -d lib",
     "check-types": "tsc",
     "eslint": "eslint ./src --ext .ts,.tsx",
     "lint": "npm run eslint && npm run check-types",
