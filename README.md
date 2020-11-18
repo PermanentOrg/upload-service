@@ -45,6 +45,16 @@ An example custom policy:
 }
 ```
 
+3. Configure Sentry
+
+If you want to use Sentry, you must pass environment variables containing the [Sentry DSN](https://docs.sentry.io/product/sentry-basics/dsn-explainer/) and the [Sentry environment](https://docs.sentry.io/product/sentry-basics/environments/) that you will use for this project.
+
+**.env**
+```
+export SENTRY_DSN="https://your@dsn.ingest.sentry.io/here"
+export SENTRY_ENVIRONMENT=local
+```
+
 3. Start the project.
 
 ```
