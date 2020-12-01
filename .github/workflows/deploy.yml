@@ -28,4 +28,6 @@ jobs:
             - name: Copy package to S3
               run: |
                 aws s3 cp ../upload-service.tar.gz s3://permanent-repos/dev/upload-service.tar.gz
+                aws s3 cp ../upload-service.tar.gz s3://permanent-repos/staging/upload-service.tar.gz
+                aws s3 cp ../upload-service.tar.gz s3://permanent-repos/prod/upload-service.tar.gz
 
