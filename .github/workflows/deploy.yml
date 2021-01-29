@@ -14,11 +14,12 @@ jobs:
               with:
                 node-version: '10.x'
                 registry-url: 'https://npm.pkg.github.com'
-            - run: npm install --production
+            - run: npm install
+            - run: npm run build
             - name: Create a tar archive
               run: |
                 cd ..
-                tar --exclude=.git* -czvf upload-service.tar.gz upload-service
+                tar --exclude=.git* --exclude=node_modules/* --exclude=src/* -czvf upload-service.tar.gz upload-service
             - name: Configure AWS Credentials
               uses: aws-actions/configure-aws-credentials@v1
               with:
