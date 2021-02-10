@@ -39,7 +39,8 @@
       "name": "Cristina Muñoz"
     },
     {
-      "name": "Andrew Atwood"
+      "name": "Andrew Atwood",
+      "email": "aatwood@permanent.org"
     }
   ],
   "license": "AGPL-3.0",
