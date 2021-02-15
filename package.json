@@ -18,7 +18,31 @@
   "publishConfig": {
     "registry":"https://npm.pkg.github.com/PermanentOrg"
   },
-  "author": "Permanent.org",
+  "author": {
+    "name": "Permanent.org",
+    "email": "engineers@permanent.org",
+    "url": "https://www.permanent.org/"
+  },
+  "contributors": [
+    {
+      "name": "Dan Schultz"
+    },
+    {
+      "name": "Mithuna Krishna"
+    },
+    {
+      "name": "Jason Owen",
+      "email": "jasonaowen@opentechstrategies.com",
+      "url": "https://jasonaowen.net"
+    },
+    {
+      "name": "Cristina Muñoz"
+    },
+    {
+      "name": "Andrew Atwood",
+      "email": "aatwood@permanent.org"
+    }
+  ],
   "license": "AGPL-3.0",
   "bugs": {
     "url": "https://github.com/PermanentOrg/upload-service/issues"
