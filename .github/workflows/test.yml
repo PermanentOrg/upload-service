@@ -1,15 +1,16 @@
 name: unit tests
 on: [pull_request, workflow_dispatch]
 jobs:
-    run_tests:
-        runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                node: [ '10', '12' ]
-        steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-node@v1
-              with:
-                node-version: ${{ matrix.node }}
-            - run: npm install --production=false
-            - run: npm test
+  run_tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node:
+          - '12'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm install --production=false
+      - run: npm test
