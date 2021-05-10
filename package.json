@@ -15,9 +15,6 @@
     "type": "git",
     "url": "git+https://github.com/PermanentOrg/upload-service.git"
   },
-  "publishConfig": {
-    "registry":"https://npm.pkg.github.com/PermanentOrg"
-  },
   "author": {
     "name": "Permanent.org",
     "email": "engineers@permanent.org",
@@ -56,8 +53,10 @@
     "aws-sdk": "^2.763.0",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "express-winston": "^4.1.0",
     "joi": "^17.2.1",
-    "uuid": "^8.3.0"
+    "uuid": "^8.3.0",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.11.6",
