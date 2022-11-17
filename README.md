@@ -73,6 +73,12 @@ Should output:
 {"status":"available","message":"OK"}
 ```
 
+## Running with Docker
+
+- `cp .env.example .env` and set correct AWS credentials
+- `docker-compose up` or `sudo docker-compose up --build` to force rebuild after first run.
+- See [http://localhost:3000/api/health](http://localhost:3000/api/health)
+
 ## Endpoints
 
 ### GET /api/health
