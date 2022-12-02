@@ -1,7 +1,6 @@
-FROM node:12-alpine
+FROM node:14-alpine
 
 LABEL name="upload-service" version="1.0" maintainer="Permanent Legacy Foundation <https://permanent.org>"
-
 
 WORKDIR /src
 
