@@ -172,7 +172,7 @@ describe("validateCreateFileDestinationUrlParams", () => {
         bucket: "test",
         fileName: "test",
         fileType: "test",
-        maxSize: 0,
+        maxSize: -1,
         path: "/test",
       });
     } catch (err) {

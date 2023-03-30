@@ -18,7 +18,7 @@ export function validateCreateFileDestinationUrlParams(
       bucket: Joi.string().min(3, "utf8").max(63, "utf8").required(),
       fileName: Joi.string().max(1024, "utf8"),
       fileType: Joi.string().required(),
-      maxSize: Joi.number().min(1).required(),
+      maxSize: Joi.number().min(0).required(),
       path: Joi.string(),
     })
     .validate(data, { abortEarly: false });

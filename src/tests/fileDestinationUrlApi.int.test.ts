@@ -38,5 +38,20 @@ describe("fileDestinationUrl API #int", () => {
 
       expect(response.body).toMatchSnapshot();
     });
+
+    it('should return an S3 URL when a zero-sized file is passed', async () => {
+      const response = await agent
+        .post('/api/fileDestinationUrl')
+        .send({
+          bucket: 'permanent-tests',
+          path: 'my_example_path',
+          fileType: 'image/png',
+          fileName: 'example.png',
+          maxSize: 0,
+        })
+        .expect(200);
+
+      expect(response.body).toMatchSnapshot();
+    });
   });
 });
