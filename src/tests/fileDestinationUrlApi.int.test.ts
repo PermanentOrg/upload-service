@@ -1,22 +1,21 @@
-import request from 'supertest';
-import { app } from '../app';
+import request from "supertest";
+import { app } from "../app";
 
-jest.mock('aws-sdk');
+jest.mock("@aws-sdk/s3-presigned-post");
+jest.mock("@aws-sdk/client-s3");
 
-describe('fileDestinationUrl API #int', () => {
+describe("fileDestinationUrl API #int", () => {
   const agent = request(app);
-  describe('POST /api/fileDestinationUrl', () => {
-    it('should specify all validation details when passed no parameters', async () => {
-      const response = await agent
-        .post('/api/fileDestinationUrl')
-        .expect(400);
+  describe("POST /api/fileDestinationUrl", () => {
+    it("should specify all validation details when passed no parameters", async () => {
+      const response = await agent.post("/api/fileDestinationUrl").expect(400);
 
       expect(response.body).toMatchSnapshot();
     });
 
-    it('should specify all validation details when passed a negative maxSize', async () => {
+    it("should specify all validation details when passed a negative maxSize", async () => {
       const response = await agent
-        .post('/api/fileDestinationUrl')
+        .post("/api/fileDestinationUrl")
         .send({
           maxSize: -1,
         })
@@ -25,14 +24,14 @@ describe('fileDestinationUrl API #int', () => {
       expect(response.body).toMatchSnapshot();
     });
 
-    it('should return an S3 URL when passed the proper parameters', async () => {
+    it("should return an S3 URL when passed the proper parameters", async () => {
       const response = await agent
-        .post('/api/fileDestinationUrl')
+        .post("/api/fileDestinationUrl")
         .send({
-          bucket: 'permanent-tests',
-          path: 'my_example_path',
-          fileType: 'image/png',
-          fileName: 'example.png',
+          bucket: "permanent-tests",
+          path: "my_example_path",
+          fileType: "image/png",
+          fileName: "example.png",
           maxSize: 5000000,
         })
         .expect(200);

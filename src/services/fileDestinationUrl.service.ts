@@ -1,5 +1,16 @@
-import { S3 } from 'aws-sdk';
-import { v4 as uuidv4 } from 'uuid';
+import {
+  S3Client,
+  CreateMultipartUploadCommand,
+  UploadPartCommand,
+  CompleteMultipartUploadCommand,
+  CompletedPart,
+} from "@aws-sdk/client-s3";
+import { createPresignedPost } from "@aws-sdk/s3-presigned-post";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import type { PresignedPost } from "@aws-sdk/s3-presigned-post";
+import { v4 as uuidv4 } from "uuid";
+
+const tenMB = 10 * 1024 * 1024;
 
 export interface CreateFileDestinationUrlParams {
   bucket: string;
@@ -9,61 +20,126 @@ export interface CreateFileDestinationUrlParams {
   path: string;
 }
 
-export interface CreateFileDestinationUrlResponse {
-  destinationUrl: string;
-  presignedPost: S3.PresignedPost;
+export interface StartMultipartUploadParams {
+  bucket: string;
+  fileName: string;
+  path: string;
 }
 
-/**
- * This helper method will generate a presigned post.
- *
- * @param  {S3.PresignedPost.Params}   s3Params The parameters to pass to S3.
- * @return {Promise<S3.PresignedPost>}          The resulting presigned post.
- */
-const createPresignedPost = async (
-  s3Params: S3.PresignedPost.Params,
-): Promise<S3.PresignedPost> => {
-  const s3 = new S3();
-  // This does NOT use the callback variation of createPresignedPost due to a bug in the aws sdk.
-  // The downside is that this means credentials cannot be provided via IAM, and must be provided
-  // directly. Once the sdk bug is fixed, we would like to use the callback approach.
-  // https://github.com/aws/aws-sdk-js/issues/3486
-  //
-  // When we do eventually implement the callback approach, please note this additional bug:
-  // The callback types need to be manually overridden to allow for null as well as Error, due
-  // to a bug in the AWS SDK type definitions.
-  // https://github.com/aws/aws-sdk-js/issues/3055
-  return new Promise<S3.PresignedPost>((resolve) => {
-    resolve(s3.createPresignedPost(s3Params));
-  });
-};
+export interface CreateMultipartUploadUrlParams {
+  bucket: string;
+  key: string;
+  uploadId: string;
+  fileSizeInBytes: number;
+  startingPartNumber: number;
+}
+
+export interface CompleteMultipartUploadParams {
+  bucket: string;
+  key: string;
+  uploadId: string;
+  parts: CompletedPart[];
+}
+
+export interface CreateFileDestinationUrlResponse {
+  destinationUrl: string;
+  presignedPost: PresignedPost;
+}
 
 const createFileDestinationUrl = async ({
   bucket,
   fileType,
   maxSize,
-  fileName = '',
-  path = '',
+  fileName = "",
+  path = "",
 }: CreateFileDestinationUrlParams): Promise<CreateFileDestinationUrlResponse> => {
   const key = `${path}/${fileName || uuidv4()}`;
-  const s3Params = {
+  const presignedPost = await createPresignedPost(new S3Client({}), {
     Bucket: bucket,
-    Fields: {
-      Key: key,
-    },
+    Key: key,
     Expires: 3600,
     Conditions: [
-      ['eq', '$Content-Type', fileType],
-      ['content-length-range', 0, maxSize],
+      ["eq", "$Content-Type", fileType],
+      ["content-length-range", 0, maxSize],
     ],
-  };
-  const presignedPost = await createPresignedPost(s3Params);
+  });
   return {
     destinationUrl: `https://${bucket}.s3.amazonaws.com/${key}`,
     presignedPost,
   };
 };
 
+const startMultipartUpload = async ({
+  bucket,
+  fileName = "",
+  path = "",
+}: StartMultipartUploadParams) => {
+  const key = `${path}/${fileName || uuidv4()}`;
+  const client = new S3Client({});
+  const { UploadId: uploadId } = await client.send(
+    new CreateMultipartUploadCommand({
+      Bucket: bucket,
+      Key: key,
+    })
+  );
+
+  return { key, uploadId };
+};
+
+const createMultipartUploadUrls = async ({
+  bucket,
+  key,
+  uploadId,
+  fileSizeInBytes,
+  startingPartNumber,
+}: CreateMultipartUploadUrlParams) => {
+  const client = new S3Client({});
+  const urls = await Promise.all(
+    [...Array(Math.ceil(fileSizeInBytes / tenMB)).keys()].map(
+      async (i: number): Promise<string> => {
+        const url = await getSignedUrl(
+          client,
+          new UploadPartCommand({
+            Bucket: bucket,
+            Key: key,
+            UploadId: uploadId,
+            PartNumber: startingPartNumber + i,
+          }),
+          { expiresIn: 3600 }
+        );
+        console.log(url);
+        return url;
+      }
+    )
+  );
+
+  return { urls };
+};
+
+const completeMultipartUpload = async ({
+  bucket,
+  key,
+  uploadId,
+  parts,
+}: CompleteMultipartUploadParams) => {
+  const client = new S3Client({});
+  const result = await client.send(
+    new CompleteMultipartUploadCommand({
+      Bucket: bucket,
+      Key: key,
+      UploadId: uploadId,
+      MultipartUpload: {
+        Parts: parts,
+      },
+    })
+  );
+  const uploadUrl = decodeURIComponent(result.Location ?? "");
+  return { uploadUrl };
+};
+
 export const fileDestinationUrlService = {
   createFileDestinationUrl,
+  startMultipartUpload,
+  createMultipartUploadUrls,
+  completeMultipartUpload,
 };
