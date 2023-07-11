@@ -105,7 +105,7 @@ const createMultipartUploadUrls = async ({
             UploadId: uploadId,
             PartNumber: startingPartNumber + i,
           }),
-          { expiresIn: 3600 }
+          { expiresIn: 86400 }
         );
         console.log(url);
         return url;
