@@ -58,7 +58,7 @@
     "express-winston": "^4.2.0",
     "joi": "^17.9.2",
     "uuid": "^8.3.0",
-    "winston": "^3.8.2"
+    "winston": "^3.10.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.22.9",
