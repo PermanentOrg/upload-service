@@ -1,4 +1,4 @@
-FROM node:14-alpine
+FROM node:18-alpine
 
 LABEL name="upload-service" version="1.0" maintainer="Permanent Legacy Foundation <https://permanent.org>"
 
