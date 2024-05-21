@@ -1,49 +1,49 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`fileDestinationUrl API #int POST /api/fileDestinationUrl should return an S3 URL when passed the proper parameters 1`] = `
-Object {
+{
   "destinationUrl": "https://permanent-tests.s3.amazonaws.com/my_example_path/example.png",
 }
 `;
 
 exports[`fileDestinationUrl API #int POST /api/fileDestinationUrl should specify all validation details when passed a negative maxSize 1`] = `
-Object {
-  "error": Object {
-    "_original": Object {
+{
+  "error": {
+    "_original": {
       "maxSize": -1,
     },
-    "details": Array [
-      Object {
-        "context": Object {
+    "details": [
+      {
+        "context": {
           "key": "bucket",
           "label": "bucket",
         },
-        "message": "\\"bucket\\" is required",
-        "path": Array [
+        "message": ""bucket" is required",
+        "path": [
           "bucket",
         ],
         "type": "any.required",
       },
-      Object {
-        "context": Object {
+      {
+        "context": {
           "key": "fileType",
           "label": "fileType",
         },
-        "message": "\\"fileType\\" is required",
-        "path": Array [
+        "message": ""fileType" is required",
+        "path": [
           "fileType",
         ],
         "type": "any.required",
       },
-      Object {
-        "context": Object {
+      {
+        "context": {
           "key": "maxSize",
           "label": "maxSize",
           "limit": 1,
           "value": -1,
         },
-        "message": "\\"maxSize\\" must be greater than or equal to 1",
-        "path": Array [
+        "message": ""maxSize" must be greater than or equal to 1",
+        "path": [
           "maxSize",
         ],
         "type": "number.min",
@@ -54,39 +54,39 @@ Object {
 `;
 
 exports[`fileDestinationUrl API #int POST /api/fileDestinationUrl should specify all validation details when passed no parameters 1`] = `
-Object {
-  "error": Object {
-    "_original": Object {},
-    "details": Array [
-      Object {
-        "context": Object {
+{
+  "error": {
+    "_original": {},
+    "details": [
+      {
+        "context": {
           "key": "bucket",
           "label": "bucket",
         },
-        "message": "\\"bucket\\" is required",
-        "path": Array [
+        "message": ""bucket" is required",
+        "path": [
           "bucket",
         ],
         "type": "any.required",
       },
-      Object {
-        "context": Object {
+      {
+        "context": {
           "key": "fileType",
           "label": "fileType",
         },
-        "message": "\\"fileType\\" is required",
-        "path": Array [
+        "message": ""fileType" is required",
+        "path": [
           "fileType",
         ],
         "type": "any.required",
       },
-      Object {
-        "context": Object {
+      {
+        "context": {
           "key": "maxSize",
           "label": "maxSize",
         },
-        "message": "\\"maxSize\\" is required",
-        "path": Array [
+        "message": ""maxSize" is required",
+        "path": [
           "maxSize",
         ],
         "type": "any.required",
