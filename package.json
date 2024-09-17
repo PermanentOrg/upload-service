@@ -54,7 +54,7 @@
     "@aws-sdk/s3-request-presigner": "^3.637.0",
     "@sentry/node": "^8.28.0",
     "aws-sdk": "^2.1682.0",
-    "express": "^4.19.2",
+    "express": "^4.21.0",
     "express-winston": "^4.2.0",
     "joi": "^17.13.3",
     "uuid": "^10.0.0",
