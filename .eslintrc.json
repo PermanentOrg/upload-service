@@ -5,8 +5,11 @@
   },
   "plugins": ["@typescript-eslint"],
   "extends": [
-    "plugin:@typescript-eslint/all",
-    "airbnb-typescript/base"
+		"plugin:@typescript-eslint/recommended",
+		"plugin:@typescript-eslint/recommended-requiring-type-checking",
+		"plugin:@typescript-eslint/strict",
+		"airbnb-base",
+		"airbnb-typescript/base"
   ],
   "rules": {
     "import/prefer-default-export": "off",
