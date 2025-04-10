@@ -1,19 +1,19 @@
-import type { Request, Response, NextFunction } from "express";
-import type { CreateFileDestinationUrlParams } from "../services/fileDestinationUrl.service";
-import { fileDestinationUrlService } from "../services";
+import type { Request, Response, NextFunction } from 'express';
+import type { CreateFileDestinationUrlParams } from '../services/fileDestinationUrl.service';
+import { fileDestinationUrlService } from '../services';
 import {
   isValidationError,
   validateStartMultipartUploadParams,
   validateCreateFileDestinationUrlParams,
   validateCreateMultipartUploadUrlParams,
   validateCompleteMultipartUploadParams,
-} from "../validators";
-import { serializeError } from "../utils";
+} from '../validators';
+import { serializeError } from '../utils';
 
 const createFileDestinationUrl = (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): void => {
   try {
     validateCreateFileDestinationUrlParams(req.body);
@@ -27,17 +27,15 @@ const createFileDestinationUrl = (
   fileDestinationUrlService
     .createFileDestinationUrl(req.body)
     .then((data) => res.json(data))
-    .catch((err) =>
-      res.status(500).json({
-        error: serializeError(err),
-      })
-    );
+    .catch((err) => res.status(500).json({
+      error: serializeError(err),
+    }));
 };
 
 const startMultipartUpload = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     validateStartMultipartUploadParams(req.body);
@@ -50,7 +48,7 @@ const startMultipartUpload = async (
   }
   try {
     const data = await fileDestinationUrlService.startMultipartUpload(
-      req.body
+      req.body,
     );
     res.json(data);
   } catch (err) {
@@ -61,7 +59,7 @@ const startMultipartUpload = async (
 const createMultipartUploadUrls = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     validateCreateMultipartUploadUrlParams(req.body);
@@ -74,7 +72,7 @@ const createMultipartUploadUrls = async (
   }
   try {
     const data = await fileDestinationUrlService.createMultipartUploadUrls(
-      req.body
+      req.body,
     );
     res.json(data);
   } catch (err) {
@@ -85,7 +83,7 @@ const createMultipartUploadUrls = async (
 const completeMultipartUpload = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     validateCompleteMultipartUploadParams(req.body);
@@ -98,7 +96,7 @@ const completeMultipartUpload = async (
   }
   try {
     const data = await fileDestinationUrlService.completeMultipartUpload(
-      req.body
+      req.body,
     );
     res.json(data);
   } catch (err) {

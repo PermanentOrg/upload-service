@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/node';
+
 if ('SENTRY_DSN' in process.env
  && 'SENTRY_ENVIRONMENT' in process.env) {
   Sentry.init({
@@ -7,4 +8,3 @@ if ('SENTRY_DSN' in process.env
     environment: process.env.SENTRY_ENVIRONMENT,
   });
 }
-

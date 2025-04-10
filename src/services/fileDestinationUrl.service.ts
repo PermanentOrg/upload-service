@@ -4,11 +4,11 @@ import {
   UploadPartCommand,
   CompleteMultipartUploadCommand,
   CompletedPart,
-} from "@aws-sdk/client-s3";
-import { createPresignedPost } from "@aws-sdk/s3-presigned-post";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import type { PresignedPost } from "@aws-sdk/s3-presigned-post";
-import { v4 as uuidv4 } from "uuid";
+} from '@aws-sdk/client-s3';
+import { createPresignedPost } from '@aws-sdk/s3-presigned-post';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
+import type { PresignedPost } from '@aws-sdk/s3-presigned-post';
+import { v4 as uuidv4 } from 'uuid';
 
 const tenMB = 10 * 1024 * 1024;
 
@@ -50,8 +50,8 @@ const createFileDestinationUrl = async ({
   bucket,
   fileType,
   maxSize,
-  fileName = "",
-  path = "",
+  fileName = '',
+  path = '',
 }: CreateFileDestinationUrlParams): Promise<CreateFileDestinationUrlResponse> => {
   const key = `${path}/${fileName || uuidv4()}`;
   const presignedPost = await createPresignedPost(new S3Client({}), {
@@ -59,8 +59,8 @@ const createFileDestinationUrl = async ({
     Key: key,
     Expires: 3600,
     Conditions: [
-      ["eq", "$Content-Type", fileType],
-      ["content-length-range", 0, maxSize],
+      ['eq', '$Content-Type', fileType],
+      ['content-length-range', 0, maxSize],
     ],
   });
   return {
@@ -71,8 +71,8 @@ const createFileDestinationUrl = async ({
 
 const startMultipartUpload = async ({
   bucket,
-  fileName = "",
-  path = "",
+  fileName = '',
+  path = '',
 }: StartMultipartUploadParams) => {
   const key = `${path}/${fileName || uuidv4()}`;
   const client = new S3Client({});
@@ -80,7 +80,7 @@ const startMultipartUpload = async ({
     new CreateMultipartUploadCommand({
       Bucket: bucket,
       Key: key,
-    })
+    }),
   );
 
   return { key, uploadId };
@@ -105,12 +105,12 @@ const createMultipartUploadUrls = async ({
             UploadId: uploadId,
             PartNumber: startingPartNumber + i,
           }),
-          { expiresIn: 86400 }
+          { expiresIn: 86400 },
         );
         console.log(url);
         return url;
-      }
-    )
+      },
+    ),
   );
 
   return { urls };
@@ -131,9 +131,9 @@ const completeMultipartUpload = async ({
       MultipartUpload: {
         Parts: parts,
       },
-    })
+    }),
   );
-  const uploadUrl = decodeURIComponent(result.Location ?? "");
+  const uploadUrl = decodeURIComponent(result.Location ?? '');
   return { uploadUrl };
 };
 

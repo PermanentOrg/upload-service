@@ -1,4 +1,4 @@
-import "./instrument";
+import './instrument';
 import { app } from './app';
 import { logger } from './log';
 

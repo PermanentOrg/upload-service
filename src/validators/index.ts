@@ -4,4 +4,4 @@ export {
   validateCreateMultipartUploadUrlParams,
   validateCompleteMultipartUploadParams,
   isValidationError,
-} from "./validateFileDestinationUrlParams";
+} from './validateFileDestinationUrlParams';

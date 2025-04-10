@@ -3,18 +3,18 @@ import {
   validateStartMultipartUploadParams,
   validateCreateMultipartUploadUrlParams,
   validateCompleteMultipartUploadParams,
-} from "./validateFileDestinationUrlParams";
+} from './validateFileDestinationUrlParams';
 
-describe("validateCreateFileDestinationUrlParams", () => {
-  test("should raise no error if input is valid", () => {
+describe('validateCreateFileDestinationUrlParams', () => {
+  test('should raise no error if input is valid', () => {
     let error = null;
     try {
       validateCreateFileDestinationUrlParams({
-        bucket: "test",
-        fileName: "test",
-        fileType: "test",
+        bucket: 'test',
+        fileName: 'test',
+        fileType: 'test',
         maxSize: 1024,
-        path: "/test",
+        path: '/test',
       });
     } catch (err) {
       error = err;
@@ -22,14 +22,14 @@ describe("validateCreateFileDestinationUrlParams", () => {
       expect(error).toBeNull();
     }
   });
-  test("should raise an error if bucket is missing", () => {
+  test('should raise an error if bucket is missing', () => {
     let error = null;
     try {
       validateCreateFileDestinationUrlParams({
-        fileName: "test",
-        fileType: "test",
+        fileName: 'test',
+        fileType: 'test',
         maxSize: 1024,
-        path: "/test",
+        path: '/test',
       });
     } catch (err) {
       error = err;
@@ -37,15 +37,15 @@ describe("validateCreateFileDestinationUrlParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if bucket is too short", () => {
+  test('should raise an error if bucket is too short', () => {
     let error = null;
     try {
       validateCreateFileDestinationUrlParams({
-        bucket: "t",
-        fileName: "test",
-        fileType: "test",
+        bucket: 't',
+        fileName: 'test',
+        fileType: 'test',
         maxSize: 1024,
-        path: "/test",
+        path: '/test',
       });
     } catch (err) {
       error = err;
@@ -53,16 +53,16 @@ describe("validateCreateFileDestinationUrlParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if bucket is too long", () => {
+  test('should raise an error if bucket is too long', () => {
     let error = null;
     try {
       validateCreateFileDestinationUrlParams({
         bucket:
-          "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest",
-        fileName: "test",
-        fileType: "test",
+          'testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest',
+        fileName: 'test',
+        fileType: 'test',
         maxSize: 1024,
-        path: "/test",
+        path: '/test',
       });
     } catch (err) {
       error = err;
@@ -70,15 +70,15 @@ describe("validateCreateFileDestinationUrlParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if bucket is wrong type", () => {
+  test('should raise an error if bucket is wrong type', () => {
     let error = null;
     try {
       validateCreateFileDestinationUrlParams({
         bucket: 1,
-        fileName: "test",
-        fileType: "test",
+        fileName: 'test',
+        fileType: 'test',
         maxSize: 1024,
-        path: "/test",
+        path: '/test',
       });
     } catch (err) {
       error = err;
@@ -86,16 +86,16 @@ describe("validateCreateFileDestinationUrlParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if fileName is too long", () => {
+  test('should raise an error if fileName is too long', () => {
     let error = null;
     try {
       validateCreateFileDestinationUrlParams({
-        bucket: "test",
+        bucket: 'test',
         fileName:
-          "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest",
-        fileType: "test",
+          'testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest',
+        fileType: 'test',
         maxSize: 1024,
-        path: "/test",
+        path: '/test',
       });
     } catch (err) {
       error = err;
@@ -103,15 +103,15 @@ describe("validateCreateFileDestinationUrlParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if fileName is wrong type", () => {
+  test('should raise an error if fileName is wrong type', () => {
     let error = null;
     try {
       validateCreateFileDestinationUrlParams({
-        bucket: "test",
+        bucket: 'test',
         fileName: 1,
-        fileType: "test",
+        fileType: 'test',
         maxSize: 1024,
-        path: "/test",
+        path: '/test',
       });
     } catch (err) {
       error = err;
@@ -119,14 +119,14 @@ describe("validateCreateFileDestinationUrlParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if fileType is missing", () => {
+  test('should raise an error if fileType is missing', () => {
     let error = null;
     try {
       validateCreateFileDestinationUrlParams({
-        bucket: "test",
-        fileName: "test",
+        bucket: 'test',
+        fileName: 'test',
         maxSize: 1024,
-        path: "/test",
+        path: '/test',
       });
     } catch (err) {
       error = err;
@@ -134,15 +134,15 @@ describe("validateCreateFileDestinationUrlParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if fileType wrong type", () => {
+  test('should raise an error if fileType wrong type', () => {
     let error = null;
     try {
       validateCreateFileDestinationUrlParams({
-        bucket: "test",
-        fileName: "test",
+        bucket: 'test',
+        fileName: 'test',
         fileType: 1,
         maxSize: 1024,
-        path: "/test",
+        path: '/test',
       });
     } catch (err) {
       error = err;
@@ -150,14 +150,14 @@ describe("validateCreateFileDestinationUrlParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if maxSize is missing", () => {
+  test('should raise an error if maxSize is missing', () => {
     let error = null;
     try {
       validateCreateFileDestinationUrlParams({
-        bucket: "test",
-        fileName: "test",
-        fileType: "test",
-        path: "/test",
+        bucket: 'test',
+        fileName: 'test',
+        fileType: 'test',
+        path: '/test',
       });
     } catch (err) {
       error = err;
@@ -165,15 +165,15 @@ describe("validateCreateFileDestinationUrlParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if maxSize is too small", () => {
+  test('should raise an error if maxSize is too small', () => {
     let error = null;
     try {
       validateCreateFileDestinationUrlParams({
-        bucket: "test",
-        fileName: "test",
-        fileType: "test",
+        bucket: 'test',
+        fileName: 'test',
+        fileType: 'test',
         maxSize: 0,
-        path: "/test",
+        path: '/test',
       });
     } catch (err) {
       error = err;
@@ -181,15 +181,15 @@ describe("validateCreateFileDestinationUrlParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if maxSize is wrong type", () => {
+  test('should raise an error if maxSize is wrong type', () => {
     let error = null;
     try {
       validateCreateFileDestinationUrlParams({
-        bucket: "test",
-        fileName: "test",
-        fileType: "test",
+        bucket: 'test',
+        fileName: 'test',
+        fileType: 'test',
         maxSize: [1024],
-        path: "/test",
+        path: '/test',
       });
     } catch (err) {
       error = err;
@@ -197,13 +197,13 @@ describe("validateCreateFileDestinationUrlParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if path is wrong type", () => {
+  test('should raise an error if path is wrong type', () => {
     let error = null;
     try {
       validateCreateFileDestinationUrlParams({
-        bucket: "test",
-        fileName: "test",
-        fileType: "test",
+        bucket: 'test',
+        fileName: 'test',
+        fileType: 'test',
         maxSize: 1024,
         path: 1,
       });
@@ -215,14 +215,14 @@ describe("validateCreateFileDestinationUrlParams", () => {
   });
 });
 
-describe("validateStartMultipartUploadParams", () => {
-  test("should raise no error if input is valid", () => {
+describe('validateStartMultipartUploadParams', () => {
+  test('should raise no error if input is valid', () => {
     let error = null;
     try {
       validateStartMultipartUploadParams({
-        bucket: "test",
-        fileName: "test",
-        path: "/test",
+        bucket: 'test',
+        fileName: 'test',
+        path: '/test',
       });
     } catch (err) {
       error = err;
@@ -230,12 +230,12 @@ describe("validateStartMultipartUploadParams", () => {
       expect(error).toBeNull();
     }
   });
-  test("should raise an error if bucket is missing", () => {
+  test('should raise an error if bucket is missing', () => {
     let error = null;
     try {
       validateStartMultipartUploadParams({
-        fileName: "test",
-        path: "/test",
+        fileName: 'test',
+        path: '/test',
       });
     } catch (err) {
       error = err;
@@ -243,13 +243,13 @@ describe("validateStartMultipartUploadParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if bucket is wrong type", () => {
+  test('should raise an error if bucket is wrong type', () => {
     let error = null;
     try {
       validateStartMultipartUploadParams({
         bucket: 1,
-        fileName: "test",
-        path: "/test",
+        fileName: 'test',
+        path: '/test',
       });
     } catch (err) {
       error = err;
@@ -257,13 +257,13 @@ describe("validateStartMultipartUploadParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if bucket is too short", () => {
+  test('should raise an error if bucket is too short', () => {
     let error = null;
     try {
       validateStartMultipartUploadParams({
-        bucket: "t",
-        fileName: "test",
-        path: "/test",
+        bucket: 't',
+        fileName: 'test',
+        path: '/test',
       });
     } catch (err) {
       error = err;
@@ -271,14 +271,14 @@ describe("validateStartMultipartUploadParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if bucket is too long", () => {
+  test('should raise an error if bucket is too long', () => {
     let error = null;
     try {
       validateStartMultipartUploadParams({
         bucket:
-          "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest",
-        fileName: "test",
-        path: "/test",
+          'testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest',
+        fileName: 'test',
+        path: '/test',
       });
     } catch (err) {
       error = err;
@@ -286,13 +286,13 @@ describe("validateStartMultipartUploadParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if fileName is wrong type", () => {
+  test('should raise an error if fileName is wrong type', () => {
     let error = null;
     try {
       validateStartMultipartUploadParams({
-        bucket: "test",
+        bucket: 'test',
         fileName: 1,
-        path: "/test",
+        path: '/test',
       });
     } catch (err) {
       error = err;
@@ -300,14 +300,14 @@ describe("validateStartMultipartUploadParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if fileName is too long", () => {
+  test('should raise an error if fileName is too long', () => {
     let error = null;
     try {
       validateStartMultipartUploadParams({
-        bucket: "test",
+        bucket: 'test',
         fileName:
-          "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest",
-        path: "/test",
+          'testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest',
+        path: '/test',
       });
     } catch (err) {
       error = err;
@@ -315,12 +315,12 @@ describe("validateStartMultipartUploadParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if path is wrong type", () => {
+  test('should raise an error if path is wrong type', () => {
     let error = null;
     try {
       validateStartMultipartUploadParams({
-        bucket: "test",
-        fileName: "test",
+        bucket: 'test',
+        fileName: 'test',
         path: 1,
       });
     } catch (err) {
@@ -331,14 +331,14 @@ describe("validateStartMultipartUploadParams", () => {
   });
 });
 
-describe("validateCreateMultipartUploadUrlParams", () => {
-  test("should raise no error if input is valid", () => {
+describe('validateCreateMultipartUploadUrlParams', () => {
+  test('should raise no error if input is valid', () => {
     let error = null;
     try {
       validateCreateMultipartUploadUrlParams({
-        bucket: "test",
-        key: "test",
-        uploadId: "test",
+        bucket: 'test',
+        key: 'test',
+        uploadId: 'test',
         fileSizeInBytes: 1024,
         startingPartNumber: 1,
       });
@@ -348,12 +348,12 @@ describe("validateCreateMultipartUploadUrlParams", () => {
       expect(error).toBeNull();
     }
   });
-  test("should raise an error if bucket is missing", () => {
+  test('should raise an error if bucket is missing', () => {
     let error = null;
     try {
       validateCreateMultipartUploadUrlParams({
-        key: "test",
-        uploadId: "test",
+        key: 'test',
+        uploadId: 'test',
         fileSizeInBytes: 1024,
         startingPartNumber: 1,
       });
@@ -363,13 +363,13 @@ describe("validateCreateMultipartUploadUrlParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if bucket is too short", () => {
+  test('should raise an error if bucket is too short', () => {
     let error = null;
     try {
       validateCreateMultipartUploadUrlParams({
-        bucket: "t",
-        key: "test",
-        uploadId: "test",
+        bucket: 't',
+        key: 'test',
+        uploadId: 'test',
         fileSizeInBytes: 1024,
         startingPartNumber: 1,
       });
@@ -379,14 +379,14 @@ describe("validateCreateMultipartUploadUrlParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if bucket is too long", () => {
+  test('should raise an error if bucket is too long', () => {
     let error = null;
     try {
       validateCreateMultipartUploadUrlParams({
         bucket:
-          "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest",
-        key: "test",
-        uploadId: "test",
+          'testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest',
+        key: 'test',
+        uploadId: 'test',
         fileSizeInBytes: 1024,
         startingPartNumber: 1,
       });
@@ -396,13 +396,13 @@ describe("validateCreateMultipartUploadUrlParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if bucket is wrong type", () => {
+  test('should raise an error if bucket is wrong type', () => {
     let error = null;
     try {
       validateCreateMultipartUploadUrlParams({
         bucket: 1,
-        key: "test",
-        uploadId: "test",
+        key: 'test',
+        uploadId: 'test',
         fileSizeInBytes: 1024,
         startingPartNumber: 1,
       });
@@ -412,12 +412,12 @@ describe("validateCreateMultipartUploadUrlParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if key is missing", () => {
+  test('should raise an error if key is missing', () => {
     let error = null;
     try {
       validateCreateMultipartUploadUrlParams({
-        bucket: "test",
-        uploadId: "test",
+        bucket: 'test',
+        uploadId: 'test',
         fileSizeInBytes: 1024,
         startingPartNumber: 1,
       });
@@ -427,13 +427,13 @@ describe("validateCreateMultipartUploadUrlParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if key is wrong type", () => {
+  test('should raise an error if key is wrong type', () => {
     let error = null;
     try {
       validateCreateMultipartUploadUrlParams({
-        bucket: "test",
+        bucket: 'test',
         key: 1,
-        uploadId: "test",
+        uploadId: 'test',
         fileSizeInBytes: 1024,
         startingPartNumber: 1,
       });
@@ -443,13 +443,13 @@ describe("validateCreateMultipartUploadUrlParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if fileSizeInBytes is missing", () => {
+  test('should raise an error if fileSizeInBytes is missing', () => {
     let error = null;
     try {
       validateCreateMultipartUploadUrlParams({
-        bucket: "test",
-        key: "test",
-        uploadId: "test",
+        bucket: 'test',
+        key: 'test',
+        uploadId: 'test',
         startingPartNumber: 1,
       });
     } catch (err) {
@@ -458,13 +458,13 @@ describe("validateCreateMultipartUploadUrlParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if fileSizeInBytes is too small", () => {
+  test('should raise an error if fileSizeInBytes is too small', () => {
     let error = null;
     try {
       validateCreateMultipartUploadUrlParams({
-        bucket: "test",
-        key: "test",
-        uploadId: "test",
+        bucket: 'test',
+        key: 'test',
+        uploadId: 'test',
         fileSizeInBytes: 0,
         startingPartNumber: 1,
       });
@@ -474,13 +474,13 @@ describe("validateCreateMultipartUploadUrlParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if fileSizeInBytes is wrong type", () => {
+  test('should raise an error if fileSizeInBytes is wrong type', () => {
     let error = null;
     try {
       validateCreateMultipartUploadUrlParams({
-        bucket: "test",
-        key: "test",
-        uploadId: "test",
+        bucket: 'test',
+        key: 'test',
+        uploadId: 'test',
         fileSizeInBytes: [1024],
         startingPartNumber: 1,
       });
@@ -490,12 +490,12 @@ describe("validateCreateMultipartUploadUrlParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if uploadId is missing", () => {
+  test('should raise an error if uploadId is missing', () => {
     let error = null;
     try {
       validateCreateMultipartUploadUrlParams({
-        bucket: "test",
-        key: "test",
+        bucket: 'test',
+        key: 'test',
         fileSizeInBytes: 1024,
         startingPartNumber: 1,
       });
@@ -505,12 +505,12 @@ describe("validateCreateMultipartUploadUrlParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if uploadId is wrong type", () => {
+  test('should raise an error if uploadId is wrong type', () => {
     let error = null;
     try {
       validateCreateMultipartUploadUrlParams({
-        bucket: "test",
-        key: "test",
+        bucket: 'test',
+        key: 'test',
         uploadId: 1,
         fileSizeInBytes: 1024,
         startingPartNumber: 1,
@@ -521,13 +521,13 @@ describe("validateCreateMultipartUploadUrlParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if startingPartNumber is missing", () => {
+  test('should raise an error if startingPartNumber is missing', () => {
     let error = null;
     try {
       validateCreateMultipartUploadUrlParams({
-        bucket: "test",
-        key: "test",
-        uploadId: "test",
+        bucket: 'test',
+        key: 'test',
+        uploadId: 'test',
         fileSizeInBytes: 1024,
       });
     } catch (err) {
@@ -536,13 +536,13 @@ describe("validateCreateMultipartUploadUrlParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if startingPartNumber is wrong type", () => {
+  test('should raise an error if startingPartNumber is wrong type', () => {
     let error = null;
     try {
       validateCreateMultipartUploadUrlParams({
-        bucket: "test",
-        key: "test",
-        uploadId: "test",
+        bucket: 'test',
+        key: 'test',
+        uploadId: 'test',
         fileSizeInBytes: 1024,
         startingPartNumber: [1],
       });
@@ -552,13 +552,13 @@ describe("validateCreateMultipartUploadUrlParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if startingPartNumber is too small", () => {
+  test('should raise an error if startingPartNumber is too small', () => {
     let error = null;
     try {
       validateCreateMultipartUploadUrlParams({
-        bucket: "test",
-        key: "test",
-        uploadId: "test",
+        bucket: 'test',
+        key: 'test',
+        uploadId: 'test',
         fileSizeInBytes: 1024,
         startingPartNumber: 0,
       });
@@ -570,17 +570,17 @@ describe("validateCreateMultipartUploadUrlParams", () => {
   });
 });
 
-describe("validateCompleteMultipartUploadParams", () => {
-  test("should raise no error if input is valid", () => {
+describe('validateCompleteMultipartUploadParams', () => {
+  test('should raise no error if input is valid', () => {
     let error = null;
     try {
       validateCompleteMultipartUploadParams({
-        bucket: "test",
-        key: "test",
-        uploadId: "test",
+        bucket: 'test',
+        key: 'test',
+        uploadId: 'test',
         parts: [
-          { PartNumber: 1, ETag: "testOne" },
-          { PartNumber: 2, ETag: "testTwo" },
+          { PartNumber: 1, ETag: 'testOne' },
+          { PartNumber: 2, ETag: 'testTwo' },
         ],
       });
     } catch (err) {
@@ -589,15 +589,15 @@ describe("validateCompleteMultipartUploadParams", () => {
       expect(error).toBeNull();
     }
   });
-  test("should raise an error if bucket is missing", () => {
+  test('should raise an error if bucket is missing', () => {
     let error = null;
     try {
       validateCompleteMultipartUploadParams({
-        key: "test",
-        uploadId: "test",
+        key: 'test',
+        uploadId: 'test',
         parts: [
-          { PartNumber: 1, ETag: "testOne" },
-          { PartNumber: 2, ETag: "testTwo" },
+          { PartNumber: 1, ETag: 'testOne' },
+          { PartNumber: 2, ETag: 'testTwo' },
         ],
       });
     } catch (err) {
@@ -606,16 +606,16 @@ describe("validateCompleteMultipartUploadParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if bucket is wrong type", () => {
+  test('should raise an error if bucket is wrong type', () => {
     let error = null;
     try {
       validateCompleteMultipartUploadParams({
         bucket: 1,
-        key: "test",
-        uploadId: "test",
+        key: 'test',
+        uploadId: 'test',
         parts: [
-          { PartNumber: 1, ETag: "testOne" },
-          { PartNumber: 2, ETag: "testTwo" },
+          { PartNumber: 1, ETag: 'testOne' },
+          { PartNumber: 2, ETag: 'testTwo' },
         ],
       });
     } catch (err) {
@@ -624,16 +624,16 @@ describe("validateCompleteMultipartUploadParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if bucket is too short", () => {
+  test('should raise an error if bucket is too short', () => {
     let error = null;
     try {
       validateCompleteMultipartUploadParams({
-        bucket: "t",
-        key: "test",
-        uploadId: "test",
+        bucket: 't',
+        key: 'test',
+        uploadId: 'test',
         parts: [
-          { PartNumber: 1, ETag: "testOne" },
-          { PartNumber: 2, ETag: "testTwo" },
+          { PartNumber: 1, ETag: 'testOne' },
+          { PartNumber: 2, ETag: 'testTwo' },
         ],
       });
     } catch (err) {
@@ -642,17 +642,17 @@ describe("validateCompleteMultipartUploadParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if bucket is too long", () => {
+  test('should raise an error if bucket is too long', () => {
     let error = null;
     try {
       validateCompleteMultipartUploadParams({
         bucket:
-          "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest",
-        key: "test",
-        uploadId: "test",
+          'testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest',
+        key: 'test',
+        uploadId: 'test',
         parts: [
-          { PartNumber: 1, ETag: "testOne" },
-          { PartNumber: 2, ETag: "testTwo" },
+          { PartNumber: 1, ETag: 'testOne' },
+          { PartNumber: 2, ETag: 'testTwo' },
         ],
       });
     } catch (err) {
@@ -661,15 +661,15 @@ describe("validateCompleteMultipartUploadParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if key is missing", () => {
+  test('should raise an error if key is missing', () => {
     let error = null;
     try {
       validateCompleteMultipartUploadParams({
-        bucket: "test",
-        uploadId: "test",
+        bucket: 'test',
+        uploadId: 'test',
         parts: [
-          { PartNumber: 1, ETag: "testOne" },
-          { PartNumber: 2, ETag: "testTwo" },
+          { PartNumber: 1, ETag: 'testOne' },
+          { PartNumber: 2, ETag: 'testTwo' },
         ],
       });
     } catch (err) {
@@ -678,16 +678,16 @@ describe("validateCompleteMultipartUploadParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if key is wrong type", () => {
+  test('should raise an error if key is wrong type', () => {
     let error = null;
     try {
       validateCompleteMultipartUploadParams({
-        bucket: "test",
+        bucket: 'test',
         key: 1,
-        uploadId: "test",
+        uploadId: 'test',
         parts: [
-          { PartNumber: 1, ETag: "testOne" },
-          { PartNumber: 2, ETag: "testTwo" },
+          { PartNumber: 1, ETag: 'testOne' },
+          { PartNumber: 2, ETag: 'testTwo' },
         ],
       });
     } catch (err) {
@@ -696,15 +696,15 @@ describe("validateCompleteMultipartUploadParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if uploadId is missing", () => {
+  test('should raise an error if uploadId is missing', () => {
     let error = null;
     try {
       validateCompleteMultipartUploadParams({
-        bucket: "test",
-        key: "test",
+        bucket: 'test',
+        key: 'test',
         parts: [
-          { PartNumber: 1, ETag: "testOne" },
-          { PartNumber: 2, ETag: "testTwo" },
+          { PartNumber: 1, ETag: 'testOne' },
+          { PartNumber: 2, ETag: 'testTwo' },
         ],
       });
     } catch (err) {
@@ -713,16 +713,16 @@ describe("validateCompleteMultipartUploadParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if uploadId is wrong type", () => {
+  test('should raise an error if uploadId is wrong type', () => {
     let error = null;
     try {
       validateCompleteMultipartUploadParams({
-        bucket: "test",
-        key: "test",
+        bucket: 'test',
+        key: 'test',
         uploadId: 1,
         parts: [
-          { PartNumber: 1, ETag: "testOne" },
-          { PartNumber: 2, ETag: "testTwo" },
+          { PartNumber: 1, ETag: 'testOne' },
+          { PartNumber: 2, ETag: 'testTwo' },
         ],
       });
     } catch (err) {
@@ -731,13 +731,13 @@ describe("validateCompleteMultipartUploadParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if parts is missing", () => {
+  test('should raise an error if parts is missing', () => {
     let error = null;
     try {
       validateCompleteMultipartUploadParams({
-        bucket: "test",
-        key: "test",
-        uploadId: "test",
+        bucket: 'test',
+        key: 'test',
+        uploadId: 'test',
       });
     } catch (err) {
       error = err;
@@ -745,14 +745,14 @@ describe("validateCompleteMultipartUploadParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if parts is wrong type", () => {
+  test('should raise an error if parts is wrong type', () => {
     let error = null;
     try {
       validateCompleteMultipartUploadParams({
-        bucket: "test",
-        key: "test",
-        uploadId: "test",
-        parts: "test",
+        bucket: 'test',
+        key: 'test',
+        uploadId: 'test',
+        parts: 'test',
       });
     } catch (err) {
       error = err;
@@ -760,14 +760,14 @@ describe("validateCompleteMultipartUploadParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if parts.PartNumber is missing", () => {
+  test('should raise an error if parts.PartNumber is missing', () => {
     let error = null;
     try {
       validateCompleteMultipartUploadParams({
-        bucket: "test",
-        key: "test",
-        uploadId: "test",
-        parts: [{ ETag: "testOne" }, { PartNumber: 2, ETag: "testTwo" }],
+        bucket: 'test',
+        key: 'test',
+        uploadId: 'test',
+        parts: [{ ETag: 'testOne' }, { PartNumber: 2, ETag: 'testTwo' }],
       });
     } catch (err) {
       error = err;
@@ -775,16 +775,16 @@ describe("validateCompleteMultipartUploadParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if parts.PartNumber is wrong type", () => {
+  test('should raise an error if parts.PartNumber is wrong type', () => {
     let error = null;
     try {
       validateCompleteMultipartUploadParams({
-        bucket: "test",
-        key: "test",
-        uploadId: "test",
+        bucket: 'test',
+        key: 'test',
+        uploadId: 'test',
         parts: [
-          { PartNumber: [1], ETag: "testOne" },
-          { PartNumber: 2, ETag: "testTwo" },
+          { PartNumber: [1], ETag: 'testOne' },
+          { PartNumber: 2, ETag: 'testTwo' },
         ],
       });
     } catch (err) {
@@ -793,14 +793,14 @@ describe("validateCompleteMultipartUploadParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if parts.ETag is missing", () => {
+  test('should raise an error if parts.ETag is missing', () => {
     let error = null;
     try {
       validateCompleteMultipartUploadParams({
-        bucket: "test",
-        key: "test",
-        uploadId: "test",
-        parts: [{ PartNumber: 1 }, { PartNumber: 2, ETag: "testTwo" }],
+        bucket: 'test',
+        key: 'test',
+        uploadId: 'test',
+        parts: [{ PartNumber: 1 }, { PartNumber: 2, ETag: 'testTwo' }],
       });
     } catch (err) {
       error = err;
@@ -808,16 +808,16 @@ describe("validateCompleteMultipartUploadParams", () => {
       expect(error).not.toBeNull();
     }
   });
-  test("should raise an error if parts.ETag is wrong type", () => {
+  test('should raise an error if parts.ETag is wrong type', () => {
     let error = null;
     try {
       validateCompleteMultipartUploadParams({
-        bucket: "test",
-        key: "test",
-        uploadId: "test",
+        bucket: 'test',
+        key: 'test',
+        uploadId: 'test',
         parts: [
           { PartNumber: 1, ETag: 1 },
-          { PartNumber: 2, ETag: "testTwo" },
+          { PartNumber: 2, ETag: 'testTwo' },
         ],
       });
     } catch (err) {
