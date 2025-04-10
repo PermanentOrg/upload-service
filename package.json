@@ -5,9 +5,10 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "node ./node_modules/@babel/cli/bin/babel.js --extensions \".ts,.tsx\" src -d lib",
-    "check-types": "tsc",
     "eslint": "eslint ./src --ext .ts,.tsx",
-    "lint": "npm run eslint && npm run check-types",
+    "lint": "npm run lint:eslint && npm run lint:tsc",
+    "lint:eslint": "eslint ./src --ext .ts --max-warnings=0",
+    "lint:tsc": "tsc --noEmit -p tsconfig.dev.json",
     "start": "babel-node --extensions \".ts,.tsx\" src/index.ts",
     "test": "jest"
   },
