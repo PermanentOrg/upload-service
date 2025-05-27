@@ -8,7 +8,7 @@ describe("fileDestinationUrl API #int", () => {
   const agent = request(app);
   describe("POST /api/fileDestinationUrl", () => {
     it("should specify all validation details when passed no parameters", async () => {
-      const response = await agent.post("/api/fileDestinationUrl").expect(400);
+      const response = await agent.post("/api/fileDestinationUrl").send({}).expect(400);
 
       expect(response.body).toMatchSnapshot();
     });
