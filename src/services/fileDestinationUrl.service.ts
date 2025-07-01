@@ -80,7 +80,7 @@ const startMultipartUpload = async ({
     new CreateMultipartUploadCommand({
       Bucket: bucket,
       Key: key,
-    })
+    }),
   );
 
   return { key, uploadId };
@@ -105,12 +105,11 @@ const createMultipartUploadUrls = async ({
             UploadId: uploadId,
             PartNumber: startingPartNumber + i,
           }),
-          { expiresIn: 86400 }
+          { expiresIn: 86400 },
         );
-        console.log(url);
         return url;
-      }
-    )
+      },
+    ),
   );
 
   return { urls };
@@ -131,7 +130,7 @@ const completeMultipartUpload = async ({
       MultipartUpload: {
         Parts: parts,
       },
-    })
+    }),
   );
   const uploadUrl = decodeURIComponent(result.Location ?? "");
   return { uploadUrl };
