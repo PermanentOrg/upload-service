@@ -4,19 +4,19 @@ import { fileDestinationUrlController, healthController } from "../controllers";
 const apiRoutes = express.Router();
 apiRoutes.get("/health", healthController.getHealth);
 apiRoutes.post(
-  "/fileDestinationUrl",
-  fileDestinationUrlController.createFileDestinationUrl
+	"/fileDestinationUrl",
+	fileDestinationUrlController.createFileDestinationUrl,
 );
 apiRoutes.post(
-  "/startMultipartUpload",
-  fileDestinationUrlController.startMultipartUpload
+	"/startMultipartUpload",
+	fileDestinationUrlController.startMultipartUpload,
 );
 apiRoutes.post(
-  "/multipartUploadUrls",
-  fileDestinationUrlController.createMultipartUploadUrls
+	"/multipartUploadUrls",
+	fileDestinationUrlController.createMultipartUploadUrls,
 );
 apiRoutes.post(
-  "/completeMultipartUpload",
-  fileDestinationUrlController.completeMultipartUpload
+	"/completeMultipartUpload",
+	fileDestinationUrlController.completeMultipartUpload,
 );
 export { apiRoutes };
