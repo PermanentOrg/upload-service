@@ -1,4 +1,5 @@
 ![unit tests](https://github.com/PermanentOrg/upload-service/workflows/unit%20tests/badge.svg)
+
 # Permanent.org Upload Service
 
 The upload service is responsible for handling upload requests.
@@ -50,6 +51,7 @@ An example custom policy:
 If you want to use Sentry, you must pass environment variables containing the [Sentry DSN](https://docs.sentry.io/product/sentry-basics/dsn-explainer/) and the [Sentry environment](https://docs.sentry.io/product/sentry-basics/environments/) that you will use for this project.
 
 **.env**
+
 ```
 export SENTRY_DSN="https://your@dsn.ingest.sentry.io/here"
 export SENTRY_ENVIRONMENT=local
@@ -82,17 +84,22 @@ Should output:
 ## Endpoints
 
 ### GET /api/health
+
 #### Input
+
 No inputs.
 
 #### Output
+
 Returns a health check.
 
 - `status`: either `available` or `unavailable`.
 - `message`: a more detailed explanation about the health status.
 
 ### POST /api/fileDestinationUrl
+
 #### Input
+
 ##### Required
 
 - `bucket`: the AWS S3 bucket the file will be passed to (e.g. `permanent-local`).
@@ -105,8 +112,9 @@ Returns a health check.
 - `path`: the destination path within the bucket.
 
 #### Output
+
 - `destinationUrl`: the URL that will ultimately hold the file once it has been uploaded.
-- `presignedPost`: an AWS S3 presigned post which will accept the file.  This post will contain:
+- `presignedPost`: an AWS S3 presigned post which will accept the file. This post will contain:
   - `url`: the URL that the file should be POSTed to.
   - `fields`: an array of fields which must be submitted as part of the POST body. These fields must appear before the file content itself.
 
