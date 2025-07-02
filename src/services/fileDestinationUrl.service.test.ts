@@ -1,6 +1,5 @@
 import {
   S3Client,
-  S3ClientConfig,
   CreateMultipartUploadCommand,
   CompleteMultipartUploadCommand,
 } from "@aws-sdk/client-s3";
@@ -34,7 +33,7 @@ describe("startMultipartUpload", () => {
       send: jest.fn().mockResolvedValue({ UploadId: uploadId }),
     };
     (S3Client as jest.MockedClass<typeof S3Client>).mockImplementation(
-      (configuration: S3ClientConfig) => clientMock as unknown as S3Client
+      () => clientMock as unknown as S3Client,
     );
 
     const result = await fileDestinationUrlService.startMultipartUpload({
@@ -49,9 +48,9 @@ describe("startMultipartUpload", () => {
       Key: `${path}/${fileName}`,
     });
     expect(clientMock.send).toHaveBeenCalledWith(
-      expect.any(CreateMultipartUploadCommand)
+      expect.any(CreateMultipartUploadCommand),
     );
-    expect(result).toEqual({ key: expect.any(String), uploadId });
+    expect(result).toEqual({ key: expect.any(String) as string, uploadId });
   });
 });
 
@@ -61,14 +60,12 @@ describe("createMultipartUploadUrls", () => {
   });
 
   test("should successfully generate URLs", async () => {
-    const bucket = "test_bucket";
     const key = "test_key";
-    const uploadId = "test_upload_id";
     const fileSizeInBytes = 2.5 * tenMB;
     const urls = ["url1", "url2", "url3"];
 
     (S3Client as jest.MockedClass<typeof S3Client>).mockImplementation(
-      (configuration: S3ClientConfig) => ({} as unknown as S3Client)
+      () => ({}) as unknown as S3Client,
     );
     (getSignedUrl as jest.MockedFunction<typeof getSignedUrl>)
       .mockResolvedValueOnce(urls[0])
@@ -76,14 +73,15 @@ describe("createMultipartUploadUrls", () => {
       .mockResolvedValueOnce(urls[2]);
     const result = await fileDestinationUrlService.createMultipartUploadUrls({
       bucket: "test",
-      key: key,
+      key,
       uploadId: "test_upload_id",
-      fileSizeInBytes: fileSizeInBytes,
+      fileSizeInBytes,
+      startingPartNumber: 0,
     });
 
     expect(S3Client).toHaveBeenCalledWith({});
     expect(getSignedUrl).toHaveBeenCalledTimes(
-      Math.ceil(fileSizeInBytes / tenMB)
+      Math.ceil(fileSizeInBytes / tenMB),
     );
     expect(result).toEqual({ urls });
   });
@@ -108,7 +106,7 @@ describe("completeMultipartUpload", () => {
       send: jest.fn().mockResolvedValue({ Location: uploadUrl }),
     };
     (S3Client as jest.MockedClass<typeof S3Client>).mockImplementation(
-      (configuration: S3ClientConfig) => clientMock as unknown as S3Client
+      () => clientMock as unknown as S3Client,
     );
 
     const result = await fileDestinationUrlService.completeMultipartUpload({
@@ -127,7 +125,7 @@ describe("completeMultipartUpload", () => {
       },
     });
     expect(clientMock.send).toHaveBeenCalledWith(
-      expect.any(CompleteMultipartUploadCommand)
+      expect.any(CompleteMultipartUploadCommand),
     );
     expect(result).toEqual({ uploadUrl });
   });

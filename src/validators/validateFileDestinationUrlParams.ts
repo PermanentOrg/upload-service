@@ -1,17 +1,17 @@
 import Joi from "joi";
+import type { ValidationError } from "joi";
 import type {
   CreateFileDestinationUrlParams,
   StartMultipartUploadParams,
   CreateMultipartUploadUrlParams,
   CompleteMultipartUploadParams,
 } from "../services/fileDestinationUrl.service";
-import type { ValidationError } from "joi";
 
 export const isValidationError = (err: unknown): err is ValidationError =>
   (err as ValidationError).isJoi;
 
 export function validateCreateFileDestinationUrlParams(
-  data: unknown
+  data: unknown,
 ): asserts data is CreateFileDestinationUrlParams {
   const validation = Joi.object()
     .keys({
@@ -25,10 +25,10 @@ export function validateCreateFileDestinationUrlParams(
   if (validation.error) {
     throw validation.error;
   }
-};
+}
 
 export function validateStartMultipartUploadParams(
-  data: unknown
+  data: unknown,
 ): asserts data is StartMultipartUploadParams {
   const validation = Joi.object()
     .keys({
@@ -40,10 +40,10 @@ export function validateStartMultipartUploadParams(
   if (validation.error) {
     throw validation.error;
   }
-};
+}
 
 export function validateCreateMultipartUploadUrlParams(
-  data: unknown
+  data: unknown,
 ): asserts data is CreateMultipartUploadUrlParams {
   const validation = Joi.object()
     .keys({
@@ -57,10 +57,10 @@ export function validateCreateMultipartUploadUrlParams(
   if (validation.error) {
     throw validation.error;
   }
-};
+}
 
 export function validateCompleteMultipartUploadParams(
-  data: unknown
+  data: unknown,
 ): asserts data is CompleteMultipartUploadParams {
   const validation = Joi.object()
     .keys({
@@ -72,7 +72,7 @@ export function validateCompleteMultipartUploadParams(
           Joi.object().keys({
             ETag: Joi.string().required(),
             PartNumber: Joi.number().min(1).max(10000).required(),
-          })
+          }),
         )
         .required(),
     })
@@ -80,4 +80,4 @@ export function validateCompleteMultipartUploadParams(
   if (validation.error) {
     throw validation.error;
   }
-};
+}

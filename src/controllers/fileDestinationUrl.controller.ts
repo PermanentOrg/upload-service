@@ -1,5 +1,4 @@
 import type { Request, Response, NextFunction } from "express";
-import type { CreateFileDestinationUrlParams } from "../services/fileDestinationUrl.service";
 import { fileDestinationUrlService } from "../services";
 import {
   isValidationError,
@@ -13,10 +12,18 @@ import { serializeError } from "../utils";
 const createFileDestinationUrl = (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): void => {
   try {
     validateCreateFileDestinationUrlParams(req.body);
+    fileDestinationUrlService
+      .createFileDestinationUrl(req.body)
+      .then((data) => res.json(data))
+      .catch((err: Error) =>
+        res.status(500).json({
+          error: serializeError(err),
+        }),
+      );
   } catch (err) {
     if (isValidationError(err)) {
       res.status(400).json({ error: err });
@@ -24,36 +31,22 @@ const createFileDestinationUrl = (
     }
     next(err);
   }
-  fileDestinationUrlService
-    .createFileDestinationUrl(req.body)
-    .then((data) => res.json(data))
-    .catch((err) =>
-      res.status(500).json({
-        error: serializeError(err),
-      })
-    );
 };
 
 const startMultipartUpload = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     validateStartMultipartUploadParams(req.body);
+    const data = await fileDestinationUrlService.startMultipartUpload(req.body);
+    res.json(data);
   } catch (err) {
     if (isValidationError(err)) {
       res.status(400).json({ error: err });
       return;
     }
-    next(err);
-  }
-  try {
-    const data = await fileDestinationUrlService.startMultipartUpload(
-      req.body
-    );
-    res.json(data);
-  } catch (err) {
     next(err);
   }
 };
@@ -61,23 +54,19 @@ const startMultipartUpload = async (
 const createMultipartUploadUrls = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     validateCreateMultipartUploadUrlParams(req.body);
+    const data = await fileDestinationUrlService.createMultipartUploadUrls(
+      req.body,
+    );
+    res.json(data);
   } catch (err) {
     if (isValidationError(err)) {
       res.status(400).json({ error: err });
       return;
     }
-    next(err);
-  }
-  try {
-    const data = await fileDestinationUrlService.createMultipartUploadUrls(
-      req.body
-    );
-    res.json(data);
-  } catch (err) {
     next(err);
   }
 };
@@ -85,23 +74,19 @@ const createMultipartUploadUrls = async (
 const completeMultipartUpload = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     validateCompleteMultipartUploadParams(req.body);
+    const data = await fileDestinationUrlService.completeMultipartUpload(
+      req.body,
+    );
+    res.json(data);
   } catch (err) {
     if (isValidationError(err)) {
       res.status(400).json({ error: err });
       return;
     }
-    next(err);
-  }
-  try {
-    const data = await fileDestinationUrlService.completeMultipartUpload(
-      req.body
-    );
-    res.json(data);
-  } catch (err) {
     next(err);
   }
 };
