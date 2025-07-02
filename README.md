@@ -131,3 +131,13 @@ Found a vulnerability? Report this and any other security concerns to engineers@
 This code is free software licensed as [AGPLv3](LICENSE), or at your
 option, any final, later version published by the Free Software
 Foundation.
+
+## Ignored revisions
+
+We have set up a file to track commits that are focused on formatting changes. It is possible to [ignore these commits when running git blame](https://akrabat.com/ignoring-revisions-with-git-blame/).
+
+You can configure your local git to always ignore these commits by invoking:
+
+```
+git config blame.ignoreRevsFile .git-blame-ignore-revs
+```
