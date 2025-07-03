@@ -1,20 +1,38 @@
+// jest hoists mock() calls to the top and these are used in the mocks
+const sendMock = jest.fn();
+const getSignedUrlMock = jest.fn();
 import {
 	S3Client,
 	CreateMultipartUploadCommand,
 	CompleteMultipartUploadCommand,
 } from "@aws-sdk/client-s3";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { fileDestinationUrlService } from "./fileDestinationUrl.service";
+import type * as requestPresignerModule from "@aws-sdk/s3-request-presigner";
+import type * as s3Module from "@aws-sdk/client-s3";
 
-jest.mock("@aws-sdk/client-s3", () => ({
-	S3Client: jest.fn(),
-	CreateMultipartUploadCommand: jest.fn(),
-	UploadPartCommand: jest.fn(),
-	CompleteMultipartUploadCommand: jest.fn(),
-}));
-jest.mock("@aws-sdk/s3-request-presigner", () => ({
-	getSignedUrl: jest.fn(),
-}));
+jest.mock("@aws-sdk/client-s3", () => {
+	const originalS3Module =
+		jest.requireActual<typeof s3Module>("@aws-sdk/client-s3");
+	return {
+		...originalS3Module,
+		S3Client: jest.fn(() => ({
+			send: sendMock,
+		})),
+		CreateMultipartUploadCommand: jest.fn(),
+		UploadPartCommand: jest.fn(),
+		CompleteMultipartUploadCommand: jest.fn(),
+	};
+});
+
+jest.mock("@aws-sdk/s3-request-presigner", () => {
+	const originalRequestPresignerModule = jest.requireActual<
+		typeof requestPresignerModule
+	>("@aws-sdk/s3-request-presigner");
+	return {
+		...originalRequestPresignerModule,
+		getSignedUrl: getSignedUrlMock,
+	};
+});
 
 const tenMB = 10 * 1024 * 1024;
 
@@ -29,12 +47,7 @@ describe("startMultipartUpload", () => {
 		const path = "/test";
 		const uploadId = "test_upload_id";
 
-		const clientMock = {
-			send: jest.fn().mockResolvedValue({ UploadId: uploadId }),
-		};
-		(S3Client as jest.MockedClass<typeof S3Client>).mockImplementation(
-			() => clientMock as unknown as S3Client,
-		);
+		sendMock.mockResolvedValue({ UploadId: uploadId });
 
 		const result = await fileDestinationUrlService.startMultipartUpload({
 			bucket,
@@ -47,10 +60,10 @@ describe("startMultipartUpload", () => {
 			Bucket: bucket,
 			Key: `${path}/${fileName}`,
 		});
-		expect(clientMock.send).toHaveBeenCalledWith(
+		expect(sendMock).toHaveBeenCalledWith(
 			expect.any(CreateMultipartUploadCommand),
 		);
-		expect(result).toEqual({ key: expect.any(String) as string, uploadId });
+		expect(result).toEqual({ key: expect.any(String) as unknown, uploadId });
 	});
 });
 
@@ -64,10 +77,7 @@ describe("createMultipartUploadUrls", () => {
 		const fileSizeInBytes = 2.5 * tenMB;
 		const urls = ["url1", "url2", "url3"];
 
-		(S3Client as jest.MockedClass<typeof S3Client>).mockImplementation(
-			() => ({}) as unknown as S3Client,
-		);
-		(getSignedUrl as jest.MockedFunction<typeof getSignedUrl>)
+		getSignedUrlMock
 			.mockResolvedValueOnce(urls[0])
 			.mockResolvedValueOnce(urls[1])
 			.mockResolvedValueOnce(urls[2]);
@@ -79,8 +89,7 @@ describe("createMultipartUploadUrls", () => {
 			startingPartNumber: 0,
 		});
 
-		expect(S3Client).toHaveBeenCalledWith({});
-		expect(getSignedUrl).toHaveBeenCalledTimes(
+		expect(getSignedUrlMock).toHaveBeenCalledTimes(
 			Math.ceil(fileSizeInBytes / tenMB),
 		);
 		expect(result).toEqual({ urls });
@@ -102,12 +111,7 @@ describe("completeMultipartUpload", () => {
 		];
 		const uploadUrl = "s3://test-url";
 
-		const clientMock = {
-			send: jest.fn().mockResolvedValue({ Location: uploadUrl }),
-		};
-		(S3Client as jest.MockedClass<typeof S3Client>).mockImplementation(
-			() => clientMock as unknown as S3Client,
-		);
+		sendMock.mockResolvedValue({ Location: uploadUrl });
 
 		const result = await fileDestinationUrlService.completeMultipartUpload({
 			bucket,
@@ -115,7 +119,6 @@ describe("completeMultipartUpload", () => {
 			uploadId,
 			parts,
 		});
-		expect(S3Client).toHaveBeenCalledWith({});
 		expect(CompleteMultipartUploadCommand).toHaveBeenCalledWith({
 			Bucket: bucket,
 			Key: key,
@@ -124,7 +127,7 @@ describe("completeMultipartUpload", () => {
 				Parts: parts,
 			},
 		});
-		expect(clientMock.send).toHaveBeenCalledWith(
+		expect(sendMock).toHaveBeenCalledWith(
 			expect.any(CompleteMultipartUploadCommand),
 		);
 		expect(result).toEqual({ uploadUrl });

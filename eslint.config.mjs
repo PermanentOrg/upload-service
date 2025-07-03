@@ -54,7 +54,6 @@ export default defineConfig([
 
 			// These are `love` rules that we were violating.  We should review these one at a time.
 			"@typescript-eslint/no-magic-numbers": "off",
-			"@typescript-eslint/no-unsafe-type-assertion": "off",
 			"@typescript-eslint/use-unknown-in-catch-callback-variable": "off",
 			"@typescript-eslint/return-await": "off",
 		},
@@ -71,6 +70,12 @@ export default defineConfig([
 			"jest/unbound-method": "error",
 			"jest/no-focused-tests": "error",
 			"max-lines": "off",
+			"@typescript-eslint/no-magic-numbers": "off",
+
+			// We sometimes need to define mocked functions at the top of test files
+			// due to the way jest hoists `mock()` calls.
+			// If / when we create better mock utilities we can remove this override.
+			"import/first": "off",
 		},
 	},
 ]);
