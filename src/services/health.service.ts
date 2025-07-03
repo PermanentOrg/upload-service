@@ -26,7 +26,7 @@ const getHealth = async (): Promise<HealthReport> => {
 	} catch (err: unknown) {
 		let message = "unknown error";
 		if (err instanceof Error) {
-			message = err.message;
+			({ message } = err);
 		}
 		return {
 			status: HealthStatus.UNAVAILABLE,
