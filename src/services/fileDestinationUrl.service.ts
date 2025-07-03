@@ -26,6 +26,11 @@ export interface StartMultipartUploadParams {
 	path: string;
 }
 
+export interface StartMultipartUploadResponse {
+	key: string;
+	uploadId: string;
+}
+
 export interface CreateMultipartUploadUrlParams {
 	bucket: string;
 	key: string;
@@ -34,11 +39,19 @@ export interface CreateMultipartUploadUrlParams {
 	startingPartNumber: number;
 }
 
+export interface CreateMultipartUploadUrlsResponse {
+	urls: string[];
+}
+
 export interface CompleteMultipartUploadParams {
 	bucket: string;
 	key: string;
 	uploadId: string;
 	parts: CompletedPart[];
+}
+
+export interface CompleteMultipartUploadResponse {
+	uploadUrl: string;
 }
 
 export interface CreateFileDestinationUrlResponse {
@@ -74,7 +87,7 @@ const startMultipartUpload = async ({
 	bucket,
 	fileName = "",
 	path = "",
-}: StartMultipartUploadParams) => {
+}: StartMultipartUploadParams): Promise<StartMultipartUploadResponse> => {
 	const resolvedFileName = fileName === "" ? uuidv4() : fileName;
 	const key = `${path}/${resolvedFileName}`;
 	const client = new S3Client({});
@@ -85,6 +98,10 @@ const startMultipartUpload = async ({
 		}),
 	);
 
+	if (uploadId === undefined) {
+		throw new Error("S3 did not return an upload ID");
+	}
+
 	return { key, uploadId };
 };
 
@@ -94,7 +111,7 @@ const createMultipartUploadUrls = async ({
 	uploadId,
 	fileSizeInBytes,
 	startingPartNumber,
-}: CreateMultipartUploadUrlParams) => {
+}: CreateMultipartUploadUrlParams): Promise<CreateMultipartUploadUrlsResponse> => {
 	const client = new S3Client({});
 	const urls = await Promise.all(
 		[...Array(Math.ceil(fileSizeInBytes / tenMB)).keys()].map(
@@ -122,7 +139,7 @@ const completeMultipartUpload = async ({
 	key,
 	uploadId,
 	parts,
-}: CompleteMultipartUploadParams) => {
+}: CompleteMultipartUploadParams): Promise<CompleteMultipartUploadResponse> => {
 	const client = new S3Client({});
 	const result = await client.send(
 		new CompleteMultipartUploadCommand({
