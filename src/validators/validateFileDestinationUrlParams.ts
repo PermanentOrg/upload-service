@@ -22,7 +22,7 @@ export function validateCreateFileDestinationUrlParams(
 			path: Joi.string(),
 		})
 		.validate(data, { abortEarly: false });
-	if (validation.error) {
+	if (validation.error !== undefined) {
 		throw validation.error;
 	}
 }
@@ -37,7 +37,7 @@ export function validateStartMultipartUploadParams(
 			path: Joi.string(),
 		})
 		.validate(data, { abortEarly: false });
-	if (validation.error) {
+	if (validation.error !== undefined) {
 		throw validation.error;
 	}
 }
@@ -54,7 +54,7 @@ export function validateCreateMultipartUploadUrlParams(
 			startingPartNumber: Joi.number().min(1).required(),
 		})
 		.validate(data, { abortEarly: false });
-	if (validation.error) {
+	if (validation.error !== undefined) {
 		throw validation.error;
 	}
 }
@@ -77,7 +77,7 @@ export function validateCompleteMultipartUploadParams(
 				.required(),
 		})
 		.validate(data, { abortEarly: false });
-	if (validation.error) {
+	if (validation.error !== undefined) {
 		throw validation.error;
 	}
 }

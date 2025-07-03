@@ -53,7 +53,8 @@ const createFileDestinationUrl = async ({
 	fileName = "",
 	path = "",
 }: CreateFileDestinationUrlParams): Promise<CreateFileDestinationUrlResponse> => {
-	const key = `${path}/${fileName || uuidv4()}`;
+	const resolvedFileName = fileName === "" ? uuidv4() : fileName;
+	const key = `${path}/${resolvedFileName}`;
 	const presignedPost = await createPresignedPost(new S3Client({}), {
 		Bucket: bucket,
 		Key: key,
@@ -74,7 +75,8 @@ const startMultipartUpload = async ({
 	fileName = "",
 	path = "",
 }: StartMultipartUploadParams) => {
-	const key = `${path}/${fileName || uuidv4()}`;
+	const resolvedFileName = fileName === "" ? uuidv4() : fileName;
+	const key = `${path}/${resolvedFileName}`;
 	const client = new S3Client({});
 	const { UploadId: uploadId } = await client.send(
 		new CreateMultipartUploadCommand({
