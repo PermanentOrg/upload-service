@@ -19,29 +19,14 @@ export default defineConfig([
 				...globals.node,
 				...globals.jest,
 			},
-
-			ecmaVersion: 5,
-			sourceType: "commonjs",
-
 			parserOptions: {
 				project: "./tsconfig.json",
 			},
 		},
 
 		rules: {
-			"lines-between-class-members": "off",
-			"no-shadow": "off",
-			"no-undef": "off",
-			"no-unused-vars": "off",
-			"no-use-before-define": "off",
-			"require-await": "off",
 			"import/prefer-default-export": "off",
 			"import/no-default-export": "error",
-			"import/extensions": "off",
-			"import/no-unresolved": "off",
-			"import/no-extraneous-dependencies": "off",
-			"@typescript-eslint/require-await": "off",
-			"@typescript-eslint/prefer-readonly-parameter-types": "off",
 			"@typescript-eslint/no-unused-vars": [
 				"error",
 				{
@@ -50,7 +35,6 @@ export default defineConfig([
 					caughtErrorsIgnorePattern: "^_",
 				},
 			],
-			"@typescript-eslint/no-throw-literal": "off",
 		},
 	},
 	{
