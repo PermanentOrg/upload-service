@@ -1,4 +1,8 @@
-import { STS } from "aws-sdk";
+import {
+	STSClient,
+	GetCallerIdentityCommand,
+	GetCallerIdentityCommandOutput,
+} from "@aws-sdk/client-sts";
 
 export enum HealthStatus {
 	AVAILABLE = "available",
@@ -10,9 +14,10 @@ export interface HealthReport {
 	message: string;
 }
 
-const getCallerIdentity = async (): Promise<STS.GetCallerIdentityResponse> => {
-	const sts = new STS();
-	return sts.getCallerIdentity().promise();
+const getCallerIdentity = async (): Promise<GetCallerIdentityCommandOutput> => {
+	const client = new STSClient({});
+	const command = new GetCallerIdentityCommand({});
+	return await client.send(command);
 };
 
 const getHealth = async (): Promise<HealthReport> => {
