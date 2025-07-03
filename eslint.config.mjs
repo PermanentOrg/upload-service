@@ -42,6 +42,13 @@ export default defineConfig([
 			"import/no-extraneous-dependencies": "off",
 			"@typescript-eslint/require-await": "off",
 			"@typescript-eslint/prefer-readonly-parameter-types": "off",
+
+			// 0 is used for checking if an array is empty; this will unfortunately allow magic 0's in some contexts
+			// but we preferred to override the rule here as opposed to writing `isEmptyArray` with disabled linting
+			"@typescript-eslint/no-magic-numbers": [
+				"error",
+				{ ignore: [0], ignoreEnums: true },
+			],
 			"@typescript-eslint/no-unused-vars": [
 				"error",
 				{
@@ -51,9 +58,6 @@ export default defineConfig([
 				},
 			],
 			"@typescript-eslint/no-throw-literal": "off",
-
-			// These are `love` rules that we were violating.  We should review these one at a time.
-			"@typescript-eslint/no-magic-numbers": "off",
 		},
 	},
 	{

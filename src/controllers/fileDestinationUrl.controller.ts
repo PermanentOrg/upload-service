@@ -8,6 +8,7 @@ import {
 	validateCompleteMultipartUploadParams,
 } from "../validators";
 import { serializeError } from "../utils";
+import { HTTP_STATUS } from "../constants";
 
 const createFileDestinationUrl = (
 	req: Request,
@@ -20,13 +21,13 @@ const createFileDestinationUrl = (
 			.createFileDestinationUrl(req.body)
 			.then((data) => res.json(data))
 			.catch((err: unknown) =>
-				res.status(500).json({
+				res.status(HTTP_STATUS.SERVER_ERROR.INTERNAL_SERVER_ERROR).json({
 					error: serializeError(err),
 				}),
 			);
 	} catch (err) {
 		if (isValidationError(err)) {
-			res.status(400).json({ error: err });
+			res.status(HTTP_STATUS.CLIENT_ERROR.BAD_REQUEST).json({ error: err });
 			return;
 		}
 		next(err);
@@ -44,7 +45,7 @@ const startMultipartUpload = async (
 		res.json(data);
 	} catch (err) {
 		if (isValidationError(err)) {
-			res.status(400).json({ error: err });
+			res.status(HTTP_STATUS.CLIENT_ERROR.BAD_REQUEST).json({ error: err });
 			return;
 		}
 		next(err);
@@ -64,7 +65,7 @@ const createMultipartUploadUrls = async (
 		res.json(data);
 	} catch (err) {
 		if (isValidationError(err)) {
-			res.status(400).json({ error: err });
+			res.status(HTTP_STATUS.CLIENT_ERROR.BAD_REQUEST).json({ error: err });
 			return;
 		}
 		next(err);
@@ -84,7 +85,7 @@ const completeMultipartUpload = async (
 		res.json(data);
 	} catch (err) {
 		if (isValidationError(err)) {
-			res.status(400).json({ error: err });
+			res.status(HTTP_STATUS.CLIENT_ERROR.BAD_REQUEST).json({ error: err });
 			return;
 		}
 		next(err);
