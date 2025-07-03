@@ -54,7 +54,6 @@ export default defineConfig([
 			"@typescript-eslint/no-throw-literal": "off",
 
 			// These are `love` rules that we were violating.  We should review these one at a time.
-			"@typescript-eslint/strict-boolean-expressions": "off",
 			"@typescript-eslint/no-magic-numbers": "off",
 			"no-implicit-globals": "off",
 			"max-lines": "off",
