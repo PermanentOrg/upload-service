@@ -1,12 +1,20 @@
 import request from "supertest";
 import { app } from "../app";
-import { STSClient } from "@aws-sdk/client-sts";
+import type * as stsModule from "@aws-sdk/client-sts";
 
-jest.mock("@aws-sdk/client-sts");
 const mockSend = jest.fn();
-(STSClient as jest.Mock).mockImplementation(() => ({
-	send: mockSend,
-}));
+jest.mock("@aws-sdk/client-sts", () => {
+	const originalModule = jest.requireActual<typeof stsModule>(
+		"@aws-sdk/client-sts",
+	);
+
+	return {
+		...originalModule,
+		STSClient: jest.fn(() => ({
+			send: mockSend,
+		})),
+	};
+});
 
 const agent = request(app);
 

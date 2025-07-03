@@ -7,8 +7,8 @@ import type {
 	CompleteMultipartUploadParams,
 } from "../services/fileDestinationUrl.service";
 
-export const isValidationError = (err: unknown): err is ValidationError =>
-	(err as ValidationError).isJoi;
+export const isValidationError = (value: unknown): value is ValidationError =>
+	value instanceof Object && "isJoi" in value && value.isJoi === true;
 
 export const validateCreateFileDestinationUrlParams: (
 	data: unknown,
