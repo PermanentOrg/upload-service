@@ -6,7 +6,7 @@ const getHealth: Handler = (_: Request, res: Response): void => {
 	healthService
 		.getHealth()
 		.then((data) => res.json(data))
-		.catch((err: Error) =>
+		.catch((err: unknown) =>
 			res.status(500).json({
 				error: serializeError(err),
 			}),

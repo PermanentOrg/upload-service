@@ -19,7 +19,7 @@ const createFileDestinationUrl = (
 		fileDestinationUrlService
 			.createFileDestinationUrl(req.body)
 			.then((data) => res.json(data))
-			.catch((err: Error) =>
+			.catch((err: unknown) =>
 				res.status(500).json({
 					error: serializeError(err),
 				}),
