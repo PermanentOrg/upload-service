@@ -5,11 +5,19 @@ interface SerializedError {
 	};
 }
 
-const serializeError = (err: Error): SerializedError => ({
-	details: {
-		message: err.message,
-		type: err.name,
-	},
-});
+const serializeError = (err: unknown): SerializedError =>
+	err instanceof Error
+		? {
+				details: {
+					message: err.message,
+					type: err.name,
+				},
+			}
+		: {
+				details: {
+					message: "An unknown error occurred",
+					type: "UnknownError",
+				},
+			};
 
 export { serializeError };
