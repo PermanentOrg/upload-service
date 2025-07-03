@@ -1,7 +1,7 @@
 import {
 	STSClient,
 	GetCallerIdentityCommand,
-	GetCallerIdentityCommandOutput,
+	type GetCallerIdentityCommandOutput,
 } from "@aws-sdk/client-sts";
 
 export enum HealthStatus {

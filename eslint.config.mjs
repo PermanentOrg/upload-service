@@ -54,7 +54,6 @@ export default defineConfig([
 
 			// These are `love` rules that we were violating.  We should review these one at a time.
 			"@typescript-eslint/no-magic-numbers": "off",
-			"@typescript-eslint/consistent-type-imports": "off",
 			"@typescript-eslint/no-unsafe-type-assertion": "off",
 			"@typescript-eslint/use-unknown-in-catch-callback-variable": "off",
 			"@typescript-eslint/return-await": "off",
