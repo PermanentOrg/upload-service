@@ -10,9 +10,9 @@ import type {
 export const isValidationError = (err: unknown): err is ValidationError =>
 	(err as ValidationError).isJoi;
 
-export function validateCreateFileDestinationUrlParams(
+export const validateCreateFileDestinationUrlParams: (
 	data: unknown,
-): asserts data is CreateFileDestinationUrlParams {
+) => asserts data is CreateFileDestinationUrlParams = (data) => {
 	const validation = Joi.object()
 		.keys({
 			bucket: Joi.string().min(3, "utf8").max(63, "utf8").required(),
@@ -25,11 +25,11 @@ export function validateCreateFileDestinationUrlParams(
 	if (validation.error !== undefined) {
 		throw validation.error;
 	}
-}
+};
 
-export function validateStartMultipartUploadParams(
+export const validateStartMultipartUploadParams: (
 	data: unknown,
-): asserts data is StartMultipartUploadParams {
+) => asserts data is StartMultipartUploadParams = (data) => {
 	const validation = Joi.object()
 		.keys({
 			bucket: Joi.string().min(3, "utf8").max(63, "utf8").required(),
@@ -40,11 +40,11 @@ export function validateStartMultipartUploadParams(
 	if (validation.error !== undefined) {
 		throw validation.error;
 	}
-}
+};
 
-export function validateCreateMultipartUploadUrlParams(
+export const validateCreateMultipartUploadUrlParams: (
 	data: unknown,
-): asserts data is CreateMultipartUploadUrlParams {
+) => asserts data is CreateMultipartUploadUrlParams = (data) => {
 	const validation = Joi.object()
 		.keys({
 			bucket: Joi.string().min(3, "utf8").max(63, "utf8").required(),
@@ -57,11 +57,11 @@ export function validateCreateMultipartUploadUrlParams(
 	if (validation.error !== undefined) {
 		throw validation.error;
 	}
-}
+};
 
-export function validateCompleteMultipartUploadParams(
+export const validateCompleteMultipartUploadParams: (
 	data: unknown,
-): asserts data is CompleteMultipartUploadParams {
+) => asserts data is CompleteMultipartUploadParams = (data) => {
 	const validation = Joi.object()
 		.keys({
 			bucket: Joi.string().min(3, "utf8").max(63, "utf8").required(),
@@ -80,4 +80,4 @@ export function validateCompleteMultipartUploadParams(
 	if (validation.error !== undefined) {
 		throw validation.error;
 	}
-}
+};
