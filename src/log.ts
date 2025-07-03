@@ -9,6 +9,8 @@ const template = ({
 	stack,
 	...rest
 }: TransformableInfo): string => {
+	/* eslint-disable-next-line @typescript-eslint/no-magic-numbers --
+	 * "0" here is semantically meaningful*/
 	const meta = Object.keys(rest).length > 0 ? ` ${JSON.stringify(rest)}` : "";
 	const stacktrace = typeof stack === "string" ? `\n${stack}` : "";
 	const messageString =

@@ -51,9 +51,6 @@ export default defineConfig([
 				},
 			],
 			"@typescript-eslint/no-throw-literal": "off",
-
-			// These are `love` rules that we were violating.  We should review these one at a time.
-			"@typescript-eslint/no-magic-numbers": "off",
 		},
 	},
 	{
@@ -68,6 +65,7 @@ export default defineConfig([
 			"jest/unbound-method": "error",
 			"jest/no-focused-tests": "error",
 			"max-lines": "off",
+			"@typescript-eslint/no-magic-numbers": "off",
 		},
 	},
 ]);

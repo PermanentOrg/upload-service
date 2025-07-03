@@ -9,8 +9,12 @@ import { createPresignedPost } from "@aws-sdk/s3-presigned-post";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import type { PresignedPost } from "@aws-sdk/s3-presigned-post";
 import { v4 as uuidv4 } from "uuid";
-
-const tenMB = 10 * 1024 * 1024;
+import {
+	EMPTY_FILE_LENGTH_BYTES,
+	ONE_DAY_SECONDS,
+	ONE_HOUR_SECONDS,
+	TEN_MB_BYTES,
+} from "../constants";
 
 export interface CreateFileDestinationUrlParams {
 	bucket: string;
@@ -71,10 +75,10 @@ const createFileDestinationUrl = async ({
 	const presignedPost = await createPresignedPost(new S3Client({}), {
 		Bucket: bucket,
 		Key: key,
-		Expires: 3600,
+		Expires: ONE_HOUR_SECONDS,
 		Conditions: [
 			["eq", "$Content-Type", fileType],
-			["content-length-range", 0, maxSize],
+			["content-length-range", EMPTY_FILE_LENGTH_BYTES, maxSize],
 		],
 	});
 	return {
@@ -114,7 +118,7 @@ const createMultipartUploadUrls = async ({
 }: CreateMultipartUploadUrlParams): Promise<CreateMultipartUploadUrlsResponse> => {
 	const client = new S3Client({});
 	const urls = await Promise.all(
-		[...Array(Math.ceil(fileSizeInBytes / tenMB)).keys()].map(
+		[...Array(Math.ceil(fileSizeInBytes / TEN_MB_BYTES)).keys()].map(
 			async (i: number): Promise<string> => {
 				const url = await getSignedUrl(
 					client,
@@ -124,7 +128,7 @@ const createMultipartUploadUrls = async ({
 						UploadId: uploadId,
 						PartNumber: startingPartNumber + i,
 					}),
-					{ expiresIn: 86400 },
+					{ expiresIn: ONE_DAY_SECONDS },
 				);
 				return url;
 			},
