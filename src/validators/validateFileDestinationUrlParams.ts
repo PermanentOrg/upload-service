@@ -7,77 +7,99 @@ import type {
 	CompleteMultipartUploadParams,
 } from "../services/fileDestinationUrl.service";
 
-export const isValidationError = (err: unknown): err is ValidationError =>
-	(err as ValidationError).isJoi;
+const MIN_BUCKET_NAME_LENGTH = 3;
+const MAX_BUCKET_NAME_LENGTH = 63;
+const MAX_FILE_NAME_LENGTH = 1024;
+const MIN_FILE_SIZE_IN_BYTES = 0;
+const STARTING_PART_NUMBER = 1;
+const MAX_PART_NUMBER = 10000;
 
-export function validateCreateFileDestinationUrlParams(
+export const isValidationError = (value: unknown): value is ValidationError =>
+	value instanceof Object && "isJoi" in value && value.isJoi === true;
+
+export const validateCreateFileDestinationUrlParams: (
 	data: unknown,
-): asserts data is CreateFileDestinationUrlParams {
+) => asserts data is CreateFileDestinationUrlParams = (data) => {
 	const validation = Joi.object()
 		.keys({
-			bucket: Joi.string().min(3, "utf8").max(63, "utf8").required(),
-			fileName: Joi.string().max(1024, "utf8"),
+			bucket: Joi.string()
+				.min(MIN_BUCKET_NAME_LENGTH, "utf8")
+				.max(MAX_BUCKET_NAME_LENGTH, "utf8")
+				.required(),
+			fileName: Joi.string().max(MAX_FILE_NAME_LENGTH, "utf8"),
 			fileType: Joi.string().required(),
-			maxSize: Joi.number().min(0).required(),
+			maxSize: Joi.number().min(MIN_FILE_SIZE_IN_BYTES).required(),
 			path: Joi.string(),
 		})
 		.validate(data, { abortEarly: false });
-	if (validation.error) {
+	if (validation.error !== undefined) {
 		throw validation.error;
 	}
-}
+};
 
-export function validateStartMultipartUploadParams(
+export const validateStartMultipartUploadParams: (
 	data: unknown,
-): asserts data is StartMultipartUploadParams {
+) => asserts data is StartMultipartUploadParams = (data) => {
 	const validation = Joi.object()
 		.keys({
-			bucket: Joi.string().min(3, "utf8").max(63, "utf8").required(),
-			fileName: Joi.string().max(1024, "utf8"),
+			bucket: Joi.string()
+				.min(MIN_BUCKET_NAME_LENGTH, "utf8")
+				.max(MAX_BUCKET_NAME_LENGTH, "utf8")
+				.required(),
+			fileName: Joi.string().max(MAX_FILE_NAME_LENGTH, "utf8"),
 			path: Joi.string(),
 		})
 		.validate(data, { abortEarly: false });
-	if (validation.error) {
+	if (validation.error !== undefined) {
 		throw validation.error;
 	}
-}
+};
 
-export function validateCreateMultipartUploadUrlParams(
+export const validateCreateMultipartUploadUrlParams: (
 	data: unknown,
-): asserts data is CreateMultipartUploadUrlParams {
+) => asserts data is CreateMultipartUploadUrlParams = (data) => {
 	const validation = Joi.object()
 		.keys({
-			bucket: Joi.string().min(3, "utf8").max(63, "utf8").required(),
+			bucket: Joi.string()
+				.min(MIN_BUCKET_NAME_LENGTH, "utf8")
+				.max(MAX_BUCKET_NAME_LENGTH, "utf8")
+				.required(),
 			key: Joi.string().required(),
 			uploadId: Joi.string().required(),
-			fileSizeInBytes: Joi.number().min(1).required(),
-			startingPartNumber: Joi.number().min(1).required(),
+			fileSizeInBytes: Joi.number().min(MIN_FILE_SIZE_IN_BYTES).required(),
+			startingPartNumber: Joi.number().min(STARTING_PART_NUMBER).required(),
 		})
 		.validate(data, { abortEarly: false });
-	if (validation.error) {
+	if (validation.error !== undefined) {
 		throw validation.error;
 	}
-}
+};
 
-export function validateCompleteMultipartUploadParams(
+export const validateCompleteMultipartUploadParams: (
 	data: unknown,
-): asserts data is CompleteMultipartUploadParams {
+) => asserts data is CompleteMultipartUploadParams = (data) => {
 	const validation = Joi.object()
 		.keys({
-			bucket: Joi.string().min(3, "utf8").max(63, "utf8").required(),
+			bucket: Joi.string()
+				.min(MIN_BUCKET_NAME_LENGTH, "utf8")
+				.max(MAX_BUCKET_NAME_LENGTH, "utf8")
+				.required(),
 			key: Joi.string().required(),
 			uploadId: Joi.string().required(),
 			parts: Joi.array()
 				.items(
 					Joi.object().keys({
 						ETag: Joi.string().required(),
-						PartNumber: Joi.number().min(1).max(10000).required(),
+						PartNumber: Joi.number()
+							.min(STARTING_PART_NUMBER)
+							.max(MAX_PART_NUMBER)
+							.required(),
 					}),
 				)
 				.required(),
 		})
 		.validate(data, { abortEarly: false });
-	if (validation.error) {
+	if (validation.error !== undefined) {
 		throw validation.error;
 	}
-}
+};
