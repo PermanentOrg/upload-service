@@ -50,7 +50,7 @@ export const validateCreateMultipartUploadUrlParams: (
 			bucket: Joi.string().min(3, "utf8").max(63, "utf8").required(),
 			key: Joi.string().required(),
 			uploadId: Joi.string().required(),
-			fileSizeInBytes: Joi.number().min(1).required(),
+			fileSizeInBytes: Joi.number().min(0).required(),
 			startingPartNumber: Joi.number().min(1).required(),
 		})
 		.validate(data, { abortEarly: false });

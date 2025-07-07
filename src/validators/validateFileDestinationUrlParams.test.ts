@@ -465,7 +465,7 @@ describe("validateCreateMultipartUploadUrlParams", () => {
 				bucket: "test",
 				key: "test",
 				uploadId: "test",
-				fileSizeInBytes: 0,
+				fileSizeInBytes: -1,
 				startingPartNumber: 1,
 			});
 		} catch (err) {
