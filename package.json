@@ -53,7 +53,7 @@
 		"node": ">=22.0"
 	},
 	"dependencies": {
-		"@aws-sdk/client-s3": "^3.844.0",
+		"@aws-sdk/client-s3": "^3.848.0",
 		"@aws-sdk/client-sts": "^3.846.0",
 		"@aws-sdk/s3-presigned-post": "^3.842.0",
 		"@aws-sdk/s3-request-presigner": "^3.842.0",
