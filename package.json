@@ -62,7 +62,7 @@
 		"express-winston": "^4.2.0",
 		"joi": "^18.0.1",
 		"uuid": "^11.1.0",
-		"winston": "^3.17.0"
+		"winston": "^3.18.3"
 	},
 	"devDependencies": {
 		"@tsconfig/node22": "^22.0.2",
