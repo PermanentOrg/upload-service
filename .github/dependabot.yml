@@ -11,6 +11,9 @@ updates:
       aws-sdk:
         patterns:
           - "@aws-sdk/*"
+    ignore:
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: "github-actions"
     directory: ".github/workflows"
     schedule:
