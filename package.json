@@ -68,7 +68,7 @@
 		"@tsconfig/node24": "^24.0.1",
 		"@types/express": "^5.0.5",
 		"@types/jest": "^30.0.0",
-		"@types/node": "^24.10.0",
+		"@types/node": "^24.10.1",
 		"@types/supertest": "^6.0.3",
 		"@types/uuid": "^10.0.0",
 		"eslint": "^9.39.1",
