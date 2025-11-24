@@ -19,9 +19,6 @@ export default defineConfig([
 				...globals.node,
 				...globals.jest,
 			},
-			parserOptions: {
-				project: "./tsconfig.json",
-			},
 		},
 
 		rules: {
