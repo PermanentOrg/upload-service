@@ -57,7 +57,7 @@
 		"@aws-sdk/client-sts": "^3.946.0",
 		"@aws-sdk/s3-presigned-post": "^3.946.0",
 		"@aws-sdk/s3-request-presigner": "^3.946.0",
-		"@sentry/node": "^10.27.0",
+		"@sentry/node": "^10.28.0",
 		"express": "^5.2.1",
 		"express-winston": "^4.2.0",
 		"joi": "^18.0.2",
