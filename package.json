@@ -65,7 +65,7 @@
 		"winston": "^3.19.0"
 	},
 	"devDependencies": {
-		"@tsconfig/node24": "^24.0.3",
+		"@tsconfig/node24": "^24.0.4",
 		"@types/express": "^5.0.6",
 		"@types/jest": "^30.0.0",
 		"@types/node": "^24.10.4",
