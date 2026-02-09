@@ -39,9 +39,6 @@ export default defineConfig([
 					caughtErrorsIgnorePattern: "^_",
 				},
 			],
-
-			// These are new rules we were violating; disable them so we can enable them alongside fixes
-			"require-unicode-regexp": "off",
 		},
 	},
 	{

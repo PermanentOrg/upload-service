@@ -32,7 +32,7 @@ describe("health API #int", () => {
 			expect(response).toMatchObject({
 				body: {
 					status: "unavailable",
-					message: expect.stringMatching(/simulated failure/) as unknown,
+					message: expect.stringMatching(/simulated failure/v) as unknown,
 				},
 			});
 		});
