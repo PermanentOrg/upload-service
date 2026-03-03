@@ -39,6 +39,7 @@ export default defineConfig([
 					caughtErrorsIgnorePattern: "^_",
 				},
 			],
+			"@typescript-eslint/no-useless-default-assignment": "off",
 		},
 	},
 	{
