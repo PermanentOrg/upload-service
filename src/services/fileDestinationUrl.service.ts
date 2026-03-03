@@ -67,8 +67,8 @@ const createFileDestinationUrl = async ({
 	bucket,
 	fileType,
 	maxSize,
-	fileName = "",
-	path = "",
+	fileName,
+	path,
 }: CreateFileDestinationUrlParams): Promise<CreateFileDestinationUrlResponse> => {
 	const resolvedFileName = fileName === "" ? uuidv4() : fileName;
 	const key = `${path}/${resolvedFileName}`;
@@ -89,8 +89,8 @@ const createFileDestinationUrl = async ({
 
 const startMultipartUpload = async ({
 	bucket,
-	fileName = "",
-	path = "",
+	fileName,
+	path,
 }: StartMultipartUploadParams): Promise<StartMultipartUploadResponse> => {
 	const resolvedFileName = fileName === "" ? uuidv4() : fileName;
 	const key = `${path}/${resolvedFileName}`;
