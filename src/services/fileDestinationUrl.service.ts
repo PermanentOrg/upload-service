@@ -18,16 +18,16 @@ import {
 
 export interface CreateFileDestinationUrlParams {
 	bucket: string;
-	fileName: string;
+	fileName?: string;
 	fileType: string;
 	maxSize: number;
-	path: string;
+	path?: string;
 }
 
 export interface StartMultipartUploadParams {
 	bucket: string;
-	fileName: string;
-	path: string;
+	fileName?: string;
+	path?: string;
 }
 
 export interface StartMultipartUploadResponse {
@@ -67,8 +67,8 @@ const createFileDestinationUrl = async ({
 	bucket,
 	fileType,
 	maxSize,
-	fileName,
-	path,
+	fileName = "",
+	path = "",
 }: CreateFileDestinationUrlParams): Promise<CreateFileDestinationUrlResponse> => {
 	const resolvedFileName = fileName === "" ? uuidv4() : fileName;
 	const key = `${path}/${resolvedFileName}`;
@@ -89,8 +89,8 @@ const createFileDestinationUrl = async ({
 
 const startMultipartUpload = async ({
 	bucket,
-	fileName,
-	path,
+	fileName = "",
+	path = "",
 }: StartMultipartUploadParams): Promise<StartMultipartUploadResponse> => {
 	const resolvedFileName = fileName === "" ? uuidv4() : fileName;
 	const key = `${path}/${resolvedFileName}`;
