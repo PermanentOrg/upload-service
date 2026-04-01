@@ -53,10 +53,10 @@
 		"node": ">=22.0"
 	},
 	"dependencies": {
-		"@aws-sdk/client-s3": "^3.996.0",
-		"@aws-sdk/client-sts": "^3.996.0",
-		"@aws-sdk/s3-presigned-post": "^3.996.0",
-		"@aws-sdk/s3-request-presigner": "^3.996.0",
+		"@aws-sdk/client-s3": "^3.1016.0",
+		"@aws-sdk/client-sts": "^3.1016.0",
+		"@aws-sdk/s3-presigned-post": "^3.1016.0",
+		"@aws-sdk/s3-request-presigner": "^3.1016.0",
 		"@sentry/node": "^10.40.0",
 		"express": "^5.2.1",
 		"express-winston": "^4.2.0",
