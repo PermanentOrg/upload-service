@@ -1,21 +1,19 @@
-name: Lint
-
+name: CI
 on:
-  push:
-    branches: [main]
   pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   actionlint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-      - name: Lint GitHub Action workflows
-        uses: raven-actions/actionlint@v2
-  eslint:
+      - uses: raven-actions/actionlint@v2
+
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -23,8 +21,9 @@ jobs:
         with:
           node-version-file: .node-version
       - run: npm ci
-      - run: npm run lint:eslint
-  prettier:
+      - run: npm run lint
+
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -32,8 +31,9 @@ jobs:
         with:
           node-version-file: .node-version
       - run: npm ci
-      - run: npm run lint:prettier
-  tsc:
+      - run: npm test
+
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -41,4 +41,4 @@ jobs:
         with:
           node-version-file: .node-version
       - run: npm ci
-      - run: npm run lint:tsc
+      - run: npm run build
