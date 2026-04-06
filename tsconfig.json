@@ -1,6 +1,7 @@
 {
 	"extends": "@tsconfig/node24/tsconfig.json",
 	"compilerOptions": {
+		"rootDir": "src",
 		"outDir": "lib",
 		"types": ["node", "jest"]
 	},
