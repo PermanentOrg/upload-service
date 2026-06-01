@@ -61,7 +61,7 @@
 		"express": "^5.2.1",
 		"express-winston": "^4.2.0",
 		"joi": "^18.0.2",
-		"uuid": "^11.1.0",
+		"uuid": "^11.1.1",
 		"winston": "^3.19.0"
 	},
 	"devDependencies": {
@@ -70,7 +70,7 @@
 		"@types/jest": "^30.0.0",
 		"@types/node": "^24.12.0",
 		"@types/supertest": "^7.2.0",
-		"@types/uuid": "^10.0.0",
+		"@types/uuid": "^11.0.0",
 		"eslint": "^9.39.4",
 		"eslint-config-love": "^154.0.0",
 		"eslint-config-prettier": "^10.1.8",
