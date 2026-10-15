@@ -50,7 +50,7 @@
 	},
 	"homepage": "https://permanent.org",
 	"engines": {
-		"node": ">=22.0"
+		"node": ">=26.0"
 	},
 	"dependencies": {
 		"@aws-sdk/client-s3": "^3.1141.0",
@@ -65,10 +65,10 @@
 		"winston": "^3.19.0"
 	},
 	"devDependencies": {
-		"@tsconfig/node24": "^24.0.5",
+		"@tsconfig/node26": "^26.0.1",
 		"@types/express": "^5.0.6",
 		"@types/jest": "^30.0.0",
-		"@types/node": "^24.13.6",
+		"@types/node": "^26.6.5",
 		"@types/supertest": "^7.2.1",
 		"@types/uuid": "^11.0.0",
 		"eslint": "^9.39.5",
