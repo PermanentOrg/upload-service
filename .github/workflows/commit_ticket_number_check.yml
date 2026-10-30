@@ -1,0 +1,12 @@
+name: Commit ticket number check
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  jira-key:
+    uses: PermanentOrg/stela/.github/workflows/commit_ticket_number_check.yml@main
